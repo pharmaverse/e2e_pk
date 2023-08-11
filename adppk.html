@@ -184,6 +184,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#check-data-with-metacore" id="toc-check-data-with-metacore" class="nav-link" data-scroll-target="#check-data-with-metacore">Check Data With Metacore</a></li>
   <li><a href="#apply-labels-and-formats-with-xportr" id="toc-apply-labels-and-formats-with-xportr" class="nav-link" data-scroll-target="#apply-labels-and-formats-with-xportr">Apply Labels and Formats with xportr</a></li>
   <li><a href="#save-final-output" id="toc-save-final-output" class="nav-link" data-scroll-target="#save-final-output">Save Final Output</a></li>
+  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example Scripts</a></li>
+  <li><a href="#spec-file" id="toc-spec-file" class="nav-link" data-scroll-target="#spec-file">Spec File</a></li>
   </ul>
 </nav>
     </div>
@@ -756,7 +758,7 @@ qeval from the supp table only contain missing values.</code></pre>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co"># This process will be based on your metadata, no example given for this reason</span></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ...</span></span>
 <span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>dir <span class="ot">&lt;-</span> <span class="st">"."</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>dir <span class="ot">&lt;-</span> <span class="st">"./output"</span></span>
 <span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply metadata and perform associated checks ----</span></span>
 <span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="co"># uses {metatools}</span></span>
@@ -795,8 +797,29 @@ qeval from the supp table only contain missing values.</code></pre>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(adppk, <span class="at">file =</span> <span class="fu">file.path</span>(dir, <span class="st">"adppk.rds"</span>), <span class="at">compress =</span> <span class="st">"bzip2"</span>)</span>
 <span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Write CSV</span></span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(adppk_xpt, <span class="st">"adppk.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(adppk_xpt, <span class="st">"./output/adppk.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
+<section id="example" class="level1">
+<h1>Example Scripts</h1>
+<table class="table">
+<thead>
+<tr class="header">
+<th>ADaM</th>
+<th>Sample Code</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ADPPK</td>
+<td><a href="https://github.com/pharmaverse/e2e_pk/blob/main/ad_adppk_spec.R" target="_blank">ad_adppk_spec.R</a></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="spec-file" class="level1">
+<h1>Spec File</h1>
+<p><a href="https://github.com/pharmaverse/e2e_pk/blob/main/pk_spec.xlsx" target="_blank">pk_spec.xlsx</a></p>
 
 
 </section>
