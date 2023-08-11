@@ -1,0 +1,17 @@
+project:
+  type: website
+
+website:
+  title: "PK End to End Examples"
+  navbar:
+    left:
+      - adppk.qmd
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+
+editor: visual
+
