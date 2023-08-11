@@ -1,5 +1,12 @@
 [
   {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "About",
+    "section": "",
+    "text": "End to End Examples for PK\nThis site includes end to end examples for PK using {admiral} and Pharmaverse tools"
+  },
+  {
     "objectID": "about.html",
     "href": "about.html",
     "title": "About",
