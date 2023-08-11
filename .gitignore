@@ -2,6 +2,8 @@
 .Rhistory
 .RData
 .Ruserdata
+e2e_pk.Rproj
 
 /.quarto/
 /_site/
+/output/
