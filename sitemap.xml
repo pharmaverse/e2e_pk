@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://pharmaverse.github.io/e2e_pk/about.html</loc>
+    <lastmod>2023-08-11T21:33:11.000Z</lastmod>
+  </url>
+  <url>
     <loc>https://pharmaverse.github.io/e2e_pk/adppk.html</loc>
-    <lastmod>2023-08-11T21:20:44.000Z</lastmod>
+    <lastmod>2023-08-11T21:33:27.000Z</lastmod>
   </url>
 </urlset>
