@@ -6,6 +6,7 @@ website:
   navbar:
     left:
       - adppk.qmd
+      - adpc.qmd
 
 format:
   html:
