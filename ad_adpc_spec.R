@@ -18,7 +18,7 @@ library(admiral.test) # Contains example datasets from the CDISC pilot project o
 
 # ---- Load Specs for Metacore ----
 
-metacore <- spec_to_metacore("content/data/adpc/pk_spec.xlsx") %>%
+metacore <- spec_to_metacore("pk_spec.xlsx") %>%
   select_dataset("ADPC")
 
 
@@ -510,7 +510,7 @@ adpc_prefinal <- adpc_baselines %>%
 # This process will be based on your metadata, no example given for this reason
 # ...
 
-dir <- "content/data/adpc"
+dir <- "./output"
 
 # Apply metadata and perform associated checks ----
 # uses {metatools}

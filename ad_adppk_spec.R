@@ -446,7 +446,7 @@ adppk_prefinal <- adppk_aseq %>%
 # This process will be based on your metadata, no example given for this reason
 # ...
 
-dir <- "."
+dir <- "./output"
 
 # Apply metadata and perform associated checks ----
 # uses {metatools}
@@ -471,6 +471,6 @@ adppk_xpt <- adppk %>%
 saveRDS(adppk, file = file.path(dir, "adppk.rds"), compress = "bzip2")
 
 # Write CSV
-write_csv(adppk_xpt, "adppk.csv")
+write_csv(adppk_xpt, "./output/adppk.csv")
 
 
