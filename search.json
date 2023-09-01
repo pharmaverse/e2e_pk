@@ -53,7 +53,7 @@
     "href": "index.html",
     "title": "About",
     "section": "",
-    "text": "End to End Examples for PK\nThis site includes end to end examples for PK using {admiral} and other Pharmaverse tools\n\n{admiral} – Use to build CDISC analysis data\n\n\n\n\n\n\n\n{metacore} – Create and manage metadata for the analysis data\n\n\n\n\n\n\n\n{metatools} – Work with metadata derive variables and perform checks\n\n\n\n\n\n\n\n{xportr} – Perform checks on data and export to transport file"
+    "text": "End to End Examples for PK\nThis site includes end to end examples for PK using {admiral} and other Pharmaverse tools\n\n{admiral} – Use to build CDISC analysis data\n\n\n\n\n\n\n\n{metacore} – Create and manage metadata for the analysis data\n\n\n\n\n\n\n\n{metatools} – Work with metadata to derive variables and perform checks\n\n\n\n\n\n\n\n{xportr} – Perform checks on data and export to transport file"
   },
   {
     "objectID": "about.html",
