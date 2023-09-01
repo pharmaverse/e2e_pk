@@ -11,7 +11,7 @@
     "href": "adpc.html#next-load-specifications-for-metacore",
     "title": "ADPC Template",
     "section": "Next Load Specifications for Metacore",
-    "text": "Next Load Specifications for Metacore\n\n# ---- Load Specs for Metacore ----\n\nmetacore <- spec_to_metacore(\"pk_spec.xlsx\") %>%\n  select_dataset(\"ADPC\")\n\nWarning: structure from the ds_spec table only contain missing values.\n\ncore from the ds_vars table only contain missing values.\n\nsupp_flag from the ds_vars table only contain missing values.\n\nsig_dig from the value_spec table only contain missing values.\n\nThe following words in value_spec$origin are not allowed: \n    source\n    copied\n\n\nwhere from the value_spec table only contain missing values.\n\nderivation_id from the value_spec table only contain missing values.\n\nderivation_id from the derivations table only contain missing values.\n\nderivation from the derivations table only contain missing values.\n\ndataset from the supp table only contain missing values.\n\nvariable from the supp table only contain missing values.\n\nidvar from the supp table only contain missing values.\n\nqeval from the supp table only contain missing values.\n\n\nWarning: The following codelist(s) are never used:\n AGEU\n ARM\n ARMN\n ARMCD\n EPOCH\n EXDOSEU\n EXDOSFRM\n EXFREQ\n EXROUTE\n EXTRT\n OUT\n QEVAL\n YN\n Y_BLANK\n ISO 8601 Date and time formats"
+    "text": "Next Load Specifications for Metacore\n\n# ---- Load Specs for Metacore ----\n\nmetacore <- suppressWarnings(spec_to_metacore(\"pk_spec.xlsx\")) %>%\n  select_dataset(\"ADPC\")"
   },
   {
     "objectID": "adpc.html#load-source-datasets",
@@ -74,7 +74,7 @@
     "href": "adppk.html#next-load-specifications-for-metacore",
     "title": "ADPPK Template",
     "section": "Next Load Specifications for Metacore",
-    "text": "Next Load Specifications for Metacore\n\n# ---- Load Specs for Metacore ----\n\nmetacore <- spec_to_metacore(\"pk_spec.xlsx\") %>%\n  select_dataset(\"ADPPK\")\n\nWarning: structure from the ds_spec table only contain missing values.\n\ncore from the ds_vars table only contain missing values.\n\nsupp_flag from the ds_vars table only contain missing values.\n\nsig_dig from the value_spec table only contain missing values.\n\nThe following words in value_spec$origin are not allowed: \n    source\n    copied\n\n\nwhere from the value_spec table only contain missing values.\n\nderivation_id from the value_spec table only contain missing values.\n\nderivation_id from the derivations table only contain missing values.\n\nderivation from the derivations table only contain missing values.\n\ndataset from the supp table only contain missing values.\n\nvariable from the supp table only contain missing values.\n\nidvar from the supp table only contain missing values.\n\nqeval from the supp table only contain missing values.\n\n\nWarning: The following codelist(s) are never used:\n AGEU\n ARM\n ARMN\n ARMCD\n EPOCH\n EXDOSEU\n EXDOSFRM\n EXFREQ\n EXROUTE\n EXTRT\n OUT\n QEVAL\n YN\n Y_BLANK\n ISO 8601 Date and time formats"
+    "text": "Next Load Specifications for Metacore\n\n# ---- Load Specs for Metacore ----\n\nmetacore <- suppressWarnings(spec_to_metacore(\"pk_spec.xlsx\")) %>%\n  select_dataset(\"ADPPK\")"
   },
   {
     "objectID": "adppk.html#load-source-datasets",
