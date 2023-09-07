@@ -14,7 +14,7 @@ library(metatools)
 library(xportr)
 library(readr)
 
-library(admiral.test) # Contains example datasets from the CDISC pilot project or simulated
+library(pharmaversesdtm) # Contains example datasets from the CDISC pilot project or simulated
 # ---- Load Specs for Metacore ----
 
 

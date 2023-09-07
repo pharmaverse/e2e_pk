@@ -4,7 +4,7 @@
     "Repositories": [
       {
         "Name": "REPO_NAME",
-        "URL": "https://packagemanager.posit.co/cran/2023-08-08"
+        "URL": "https://packagemanager.posit.co/cran/2023-09-07"
       }
     ]
   },
@@ -567,6 +567,16 @@
         "tools"
       ],
       "Hash": "18e9c28c1d3ca1560ce30658b22ce104"
+    },
+    "pharmaversesdtm": {
+      "Package": "pharmaversesdtm",
+      "Version": "0.1.1",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Requirements": [
+        "R"
+      ],
+      "Hash": "429558ba22ef0cda13188f66cf28fa23"
     },
     "pillar": {
       "Package": "pillar",

@@ -569,7 +569,7 @@ write_csv(adppk_xpt, "./output/adppk.csv")
 # Example Scripts {#example}
 
 | ADaM  | Sample Code                                                                                         |
-|----------------|--------------------------------------------------------|
+|-------|-----------------------------------------------------------------------------------------------------|
 | ADPPK | [ad_adppk_spec.R](https://github.com/pharmaverse/e2e_pk/blob/main/ad_adppk_spec.R){target="_blank"} |
 
 # Spec File
