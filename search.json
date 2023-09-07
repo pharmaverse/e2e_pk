@@ -4,7 +4,7 @@
     "href": "adpc.html",
     "title": "ADPC Template",
     "section": "",
-    "text": "# Load Libraries\nlibrary(admiral)\nlibrary(dplyr)\nlibrary(lubridate)\nlibrary(stringr)\nlibrary(metacore)\nlibrary(metatools)\nlibrary(xportr)\n\nlibrary(admiral.test) # Contains example datasets from the CDISC pilot project or simulated"
+    "text": "# Load Libraries\nlibrary(admiral)\nlibrary(dplyr)\nlibrary(lubridate)\nlibrary(stringr)\nlibrary(metacore)\nlibrary(metatools)\nlibrary(xportr)\n\nlibrary(pharmaversesdtm) # Contains example datasets from the CDISC pilot project or simulated"
   },
   {
     "objectID": "adpc.html#next-load-specifications-for-metacore",
@@ -18,7 +18,7 @@
     "href": "adpc.html#load-source-datasets",
     "title": "ADPC Template",
     "section": "Load Source Datasets",
-    "text": "Load Source Datasets\n\n# ---- Load source datasets ----\n# Load PC, EX, VS, LB and ADSL\ndata(\"admiral_pc\")\ndata(\"admiral_ex\")\ndata(\"admiral_vs\")\n\ndata(\"admiral_adsl\")\n\nadsl <- admiral_adsl\n\n# When SAS datasets are imported into R using haven::read_sas(), missing\n# character values from SAS appear as \"\" characters in R, instead of appearing\n# as NA values. Further details can be obtained via the following link:\n# https://pharmaverse.github.io/admiral/cran-release/articles/admiral.html#handling-of-missing-values # nolint\n\n# Load EX\n\nex <- convert_blanks_to_na(admiral_ex)\n\n# Load PC\n\npc <- convert_blanks_to_na(admiral_pc)\n\n# Load VS for baseline height and weight\n\nvs <- convert_blanks_to_na(admiral_vs)\n\n# ---- Lookup tables ----\nparam_lookup <- tibble::tribble(\n  ~PCTESTCD, ~PARAMCD, ~PARAM, ~PARAMN,\n  \"XAN\", \"XAN\", \"Pharmacokinetic concentration of Xanomeline\", 1,\n  \"DOSE\", \"DOSE\", \"Xanomeline Patch Dose\", 2,\n)\n# ---- User defined functions ----\n\n# Here is an example of how you can create your own function that\n# operates on vectors, which can be used in `mutate`.\nformat_avalcat1n <- function(param, aval) {\n  case_when(\n    param == \"PKCONC\" & aval < 1 ~ 1,\n    param == \"PKCONC\" & aval >= 1 ~ 2,\n    T ~ NA_real_\n  )\n}"
+    "text": "Load Source Datasets\n\n# ---- Load source datasets ----\n# Load PC, EX, VS, LB and ADSL\ndata(\"pc\")\ndata(\"ex\")\ndata(\"vs\")\n\ndata(\"admiral_adsl\")\n\nadsl <- admiral_adsl\n\n# When SAS datasets are imported into R using haven::read_sas(), missing\n# character values from SAS appear as \"\" characters in R, instead of appearing\n# as NA values. Further details can be obtained via the following link:\n# https://pharmaverse.github.io/admiral/cran-release/articles/admiral.html#handling-of-missing-values # nolint\n\n# Load EX\n\nex <- convert_blanks_to_na(ex)\n\n# Load PC\n\npc <- convert_blanks_to_na(pc)\n\n# Load VS for baseline height and weight\n\nvs <- convert_blanks_to_na(vs)\n\n# ---- Lookup tables ----\nparam_lookup <- tibble::tribble(\n  ~PCTESTCD, ~PARAMCD, ~PARAM, ~PARAMN,\n  \"XAN\", \"XAN\", \"Pharmacokinetic concentration of Xanomeline\", 1,\n  \"DOSE\", \"DOSE\", \"Xanomeline Patch Dose\", 2,\n)\n# ---- User defined functions ----\n\n# Here is an example of how you can create your own function that\n# operates on vectors, which can be used in `mutate`.\nformat_avalcat1n <- function(param, aval) {\n  case_when(\n    param == \"PKCONC\" & aval < 1 ~ 1,\n    param == \"PKCONC\" & aval >= 1 ~ 2,\n    T ~ NA_real_\n  )\n}"
   },
   {
     "objectID": "adpc.html#derivations",
@@ -53,7 +53,7 @@
     "href": "index.html",
     "title": "About",
     "section": "",
-    "text": "End to End Examples for PK\nThis site includes end to end examples for PK using {admiral} and other Pharmaverse tools\n\n{admiral} – Use to build CDISC analysis data\n\n\n\n\n\n\n\n{metacore} – Create and manage metadata for the analysis data\n\n\n\n\n\n\n\n{metatools} – Work with metadata to derive variables and perform checks\n\n\n\n\n\n\n\n{xportr} – Perform checks on data and export to transport file"
+    "text": "End to End Examples for PK\nThis site includes end to end examples for PK using {admiral} and other Pharmaverse tools\n\n{pharmaversesdtm} – Sample Pharmaverse CDISC SDTM data\n\n\n\n\n\n\n\n{admiral} – Use to build CDISC analysis data\n\n\n\n\n\n\n\n{metacore} – Create and manage metadata for the analysis data\n\n\n\n\n\n\n\n{metatools} – Work with metadata to derive variables and perform checks\n\n\n\n\n\n\n\n{xportr} – Perform checks on data and export to transport file"
   },
   {
     "objectID": "about.html",
@@ -67,7 +67,7 @@
     "href": "adppk.html",
     "title": "ADPPK Template",
     "section": "",
-    "text": "# Load Libraries\nlibrary(admiral)\nlibrary(dplyr)\nlibrary(lubridate)\nlibrary(stringr)\nlibrary(metacore)\nlibrary(metatools)\nlibrary(xportr)\nlibrary(readr)\n\nlibrary(admiral.test) # Contains example datasets from the CDISC pilot project or simulated"
+    "text": "# Load Libraries\nlibrary(admiral)\nlibrary(dplyr)\nlibrary(lubridate)\nlibrary(stringr)\nlibrary(metacore)\nlibrary(metatools)\nlibrary(xportr)\nlibrary(readr)\n\nlibrary(pharmaversesdtm) # Contains example datasets from the CDISC pilot project or simulated"
   },
   {
     "objectID": "adppk.html#next-load-specifications-for-metacore",
@@ -81,7 +81,7 @@
     "href": "adppk.html#load-source-datasets",
     "title": "ADPPK Template",
     "section": "Load Source Datasets",
-    "text": "Load Source Datasets\n\n# ---- Load source datasets ----\n# Load PC, EX, VS, LB and ADSL\ndata(\"admiral_pc\")\ndata(\"admiral_ex\")\ndata(\"admiral_vs\")\ndata(\"admiral_lb\")\n\ndata(\"admiral_adsl\")\n\nadsl <- admiral_adsl\n\n# When SAS datasets are imported into R using haven::read_sas(), missing\n# character values from SAS appear as \"\" characters in R, instead of appearing\n# as NA values. Further details can be obtained via the following link:\n# https://pharmaverse.github.io/admiral/cran-release/articles/admiral.html#handling-of-missing-values # nolint\n\n# Load EX\n\nex <- convert_blanks_to_na(admiral_ex)\n\n# Load PC\n\npc <- convert_blanks_to_na(admiral_pc)\n\n# Load VS for baseline height and weight\n\nvs <- convert_blanks_to_na(admiral_vs)\n\n# Load LB for baseline lab values\n\nlb <- convert_blanks_to_na(admiral_lb)\n\n# ---- Lookup tables ----\nparam_lookup <- tibble::tribble(\n  ~PCTESTCD, ~PARAMCD, ~PARAM, ~PARAMN,\n  \"XAN\", \"XAN\", \"Pharmacokinetic concentration of Xanomeline\", 1,\n  \"DOSE\", \"DOSE\", \"Xanomeline Patch Dose\", 2,\n)"
+    "text": "Load Source Datasets\n\n# ---- Load source datasets ----\n# Load PC, EX, VS, LB and ADSL\ndata(\"pc\")\ndata(\"ex\")\ndata(\"vs\")\ndata(\"lb\")\n\ndata(\"admiral_adsl\")\n\nadsl <- admiral_adsl\n\n# When SAS datasets are imported into R using haven::read_sas(), missing\n# character values from SAS appear as \"\" characters in R, instead of appearing\n# as NA values. Further details can be obtained via the following link:\n# https://pharmaverse.github.io/admiral/cran-release/articles/admiral.html#handling-of-missing-values # nolint\n\n# Load EX\n\nex <- convert_blanks_to_na(ex)\n\n# Load PC\n\npc <- convert_blanks_to_na(pc)\n\n# Load VS for baseline height and weight\n\nvs <- convert_blanks_to_na(vs)\n\n# Load LB for baseline lab values\n\nlb <- convert_blanks_to_na(lb)\n\n# ---- Lookup tables ----\nparam_lookup <- tibble::tribble(\n  ~PCTESTCD, ~PARAMCD, ~PARAM, ~PARAMN,\n  \"XAN\", \"XAN\", \"Pharmacokinetic concentration of Xanomeline\", 1,\n  \"DOSE\", \"DOSE\", \"Xanomeline Patch Dose\", 2,\n)"
   },
   {
     "objectID": "adppk.html#derivations",
