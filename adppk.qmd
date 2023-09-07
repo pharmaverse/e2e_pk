@@ -26,7 +26,7 @@ library(admiral.test) # Contains example datasets from the CDISC pilot project o
 #| label: Load Specs
 # ---- Load Specs for Metacore ----
 
-metacore <- spec_to_metacore("pk_spec.xlsx") %>%
+metacore <- suppressWarnings(spec_to_metacore("pk_spec.xlsx")) %>%
   select_dataset("ADPPK")
 ```
 
@@ -569,7 +569,7 @@ write_csv(adppk_xpt, "./output/adppk.csv")
 # Example Scripts {#example}
 
 | ADaM  | Sample Code                                                                                         |
-|------------|------------------------------------------------------------|
+|----------------|--------------------------------------------------------|
 | ADPPK | [ad_adppk_spec.R](https://github.com/pharmaverse/e2e_pk/blob/main/ad_adppk_spec.R){target="_blank"} |
 
 # Spec File

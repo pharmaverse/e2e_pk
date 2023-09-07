@@ -4,6 +4,20 @@ title: "About"
 
 # End to End Examples for PK
 
-This site includes end to end examples for PK using {admiral} and Pharmaverse tools
+This site includes end to end examples for PK using `{admiral}` and other Pharmaverse tools
 
-[![{admiral}](images/admiral.png)](https://pharmaverse.github.io/admiral/cran-release/)
+### `{admiral}` -- Use to build CDISC analysis data
+
+[![](images/admiral.png){width="35%"}](https://pharmaverse.github.io/admiral/cran-release/)
+
+### `{metacore}` -- Create and manage metadata for the analysis data
+
+[![](images/metacore.png){width="35%"}](https://atorus-research.github.io/metacore/)
+
+### `{metatools}` -- Work with metadata to derive variables and perform checks
+
+[![](images/metatools.png){width="35%"}](https://pharmaverse.github.io/metatools/)
+
+### `{xportr}` -- Perform checks on data and export to transport file
+
+[![](images/xportr.png){width="35%"}](https://atorus-research.github.io/xportr/)

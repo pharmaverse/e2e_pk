@@ -17,7 +17,9 @@ library(readr)
 library(admiral.test) # Contains example datasets from the CDISC pilot project or simulated
 # ---- Load Specs for Metacore ----
 
-metacore <- spec_to_metacore("pk_spec.xlsx") %>%
+
+
+metacore <- suppressWarnings(spec_to_metacore("pk_spec.xlsx")) %>%
   select_dataset("ADPPK")
 
 # ---- Load source datasets ----
