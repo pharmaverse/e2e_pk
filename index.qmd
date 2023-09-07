@@ -6,6 +6,10 @@ title: "About"
 
 This site includes end to end examples for PK using `{admiral}` and other Pharmaverse tools
 
+### `{pharmaversesdtm}` -- Sample Pharmaverse CDISC SDTM data
+
+[![](images/pharmaversesdtm.png){width="35%"}](https://pharmaverse.github.io/pharmaversesdtm/cran-release/)
+
 ### `{admiral}` -- Use to build CDISC analysis data
 
 [![](images/admiral.png){width="35%"}](https://pharmaverse.github.io/admiral/cran-release/)

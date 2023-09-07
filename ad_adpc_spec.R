@@ -14,7 +14,7 @@ library(metacore)
 library(metatools)
 library(xportr)
 
-library(admiral.test) # Contains example datasets from the CDISC pilot project or simulated
+library(pharmaversesdtm) # Contains example datasets from the CDISC pilot project or simulated
 
 # ---- Load Specs for Metacore ----
 
@@ -30,9 +30,9 @@ metacore <- spec_to_metacore("pk_spec.xlsx") %>%
 
 
 # Load PC, EX, VS and ADSL
-data("admiral_pc")
-data("admiral_ex")
-data("admiral_vs")
+data("pc")
+data("ex")
+data("vs")
 
 data("admiral_adsl")
 
@@ -45,15 +45,15 @@ adsl <- admiral_adsl
 
 # Load EX
 
-ex <- convert_blanks_to_na(admiral_ex)
+ex <- convert_blanks_to_na(ex)
 
 # Load PC
 
-pc <- convert_blanks_to_na(admiral_pc)
+pc <- convert_blanks_to_na(pc)
 
 # Load VS for baseline height and weight
 
-vs <- convert_blanks_to_na(admiral_vs)
+vs <- convert_blanks_to_na(vs)
 
 # ---- Lookup tables ----
 param_lookup <- tibble::tribble(

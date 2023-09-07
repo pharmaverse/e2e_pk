@@ -29,10 +29,10 @@ metacore <- suppressWarnings(spec_to_metacore("pk_spec.xlsx")) %>%
 # For illustration purposes read in admiral test data
 
 # Load PC, EX, VS, LB and ADSL
-data("admiral_pc")
-data("admiral_ex")
-data("admiral_vs")
-data("admiral_lb")
+data("pc")
+data("ex")
+data("vs")
+data("lb")
 
 data("admiral_adsl")
 
@@ -45,19 +45,19 @@ adsl <- admiral_adsl
 
 # Load EX
 
-ex <- convert_blanks_to_na(admiral_ex)
+ex <- convert_blanks_to_na(ex)
 
 # Load PC
 
-pc <- convert_blanks_to_na(admiral_pc)
+pc <- convert_blanks_to_na(pc)
 
 # Load VS for baseline height and weight
 
-vs <- convert_blanks_to_na(admiral_vs)
+vs <- convert_blanks_to_na(vs)
 
 # Load LB for baseline lab values
 
-lb <- convert_blanks_to_na(admiral_lb)
+lb <- convert_blanks_to_na(lb)
 
 # ---- Lookup tables ----
 param_lookup <- tibble::tribble(

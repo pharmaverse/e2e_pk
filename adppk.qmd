@@ -16,7 +16,7 @@ library(metatools)
 library(xportr)
 library(readr)
 
-library(admiral.test) # Contains example datasets from the CDISC pilot project or simulated
+library(pharmaversesdtm) # Contains example datasets from the CDISC pilot project or simulated
 
 ```
 
@@ -36,10 +36,10 @@ metacore <- suppressWarnings(spec_to_metacore("pk_spec.xlsx")) %>%
 #| label: Load Source
 # ---- Load source datasets ----
 # Load PC, EX, VS, LB and ADSL
-data("admiral_pc")
-data("admiral_ex")
-data("admiral_vs")
-data("admiral_lb")
+data("pc")
+data("ex")
+data("vs")
+data("lb")
 
 data("admiral_adsl")
 
@@ -52,19 +52,19 @@ adsl <- admiral_adsl
 
 # Load EX
 
-ex <- convert_blanks_to_na(admiral_ex)
+ex <- convert_blanks_to_na(ex)
 
 # Load PC
 
-pc <- convert_blanks_to_na(admiral_pc)
+pc <- convert_blanks_to_na(pc)
 
 # Load VS for baseline height and weight
 
-vs <- convert_blanks_to_na(admiral_vs)
+vs <- convert_blanks_to_na(vs)
 
 # Load LB for baseline lab values
 
-lb <- convert_blanks_to_na(admiral_lb)
+lb <- convert_blanks_to_na(lb)
 
 # ---- Lookup tables ----
 param_lookup <- tibble::tribble(
@@ -569,7 +569,7 @@ write_csv(adppk_xpt, "./output/adppk.csv")
 # Example Scripts {#example}
 
 | ADaM  | Sample Code                                                                                         |
-|-------|-----------------------------------------------------------------------------------------------------|
+|------------|------------------------------------------------------------|
 | ADPPK | [ad_adppk_spec.R](https://github.com/pharmaverse/e2e_pk/blob/main/ad_adppk_spec.R){target="_blank"} |
 
 # Spec File
