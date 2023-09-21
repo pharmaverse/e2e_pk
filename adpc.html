@@ -187,7 +187,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#combine-pc-and-ex-data" id="toc-combine-pc-and-ex-data" class="nav-link" data-scroll-target="#combine-pc-and-ex-data">Combine PC and EX Data</a></li>
   <li><a href="#derive-nominal-reference" id="toc-derive-nominal-reference" class="nav-link" data-scroll-target="#derive-nominal-reference">Derive Nominal Reference</a></li>
   <li><a href="#derive-analysis-variables" id="toc-derive-analysis-variables" class="nav-link" data-scroll-target="#derive-analysis-variables">Derive Analysis Variables</a></li>
-  <li><a href="#dervie-dtype-copy-records" id="toc-dervie-dtype-copy-records" class="nav-link" data-scroll-target="#dervie-dtype-copy-records">Dervie DTYPE Copy Records</a></li>
+  <li><a href="#derive-dtype-copy-records" id="toc-derive-dtype-copy-records" class="nav-link" data-scroll-target="#derive-dtype-copy-records">Derive DTYPE Copy Records</a></li>
   <li><a href="#combine-original-and-dtype-copy" id="toc-combine-original-and-dtype-copy" class="nav-link" data-scroll-target="#combine-original-and-dtype-copy">Combine Original and DTYPE Copy</a></li>
   <li><a href="#derive-base-and-chg" id="toc-derive-base-and-chg" class="nav-link" data-scroll-target="#derive-base-and-chg">Derive BASE and CHG</a></li>
   <li><a href="#add-aseq" id="toc-add-aseq" class="nav-link" data-scroll-target="#add-aseq">Add ASEQ</a></li>
@@ -274,7 +274,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="next-load-specifications-for-metacore" class="level2">
 <h2 class="anchored" data-anchor-id="next-load-specifications-for-metacore">Next Load Specifications for Metacore</h2>
-<p>We have saved our specifications in an Excel file and will load them into <code>{metacore}</code> with the <code>spec_to_metacore()</code> function.</p>
+<p>We have saved our specifications in an Excel file and will load them into <code>{metacore}</code> with the <code>spec_to_metacore()</code> function. The spec file can be found <a href="https://github.com/pharmaverse/e2e_pk/blob/main/pk_spec.xlsx" target="_blank">here</a></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- Load Specs for Metacore ----</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -727,8 +727,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb14-68"><a href="#cb14-68" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="dervie-dtype-copy-records" class="level3">
-<h3 class="anchored" data-anchor-id="dervie-dtype-copy-records">Dervie DTYPE Copy Records</h3>
+<section id="derive-dtype-copy-records" class="level3">
+<h3 class="anchored" data-anchor-id="derive-dtype-copy-records">Derive DTYPE Copy Records</h3>
 <p>As mentioned above, the CDISC ADaM Implementation Guide for Non-compartmental Analysis uses duplicated records for analysis when a record needs to be used in more than one way. In this example the 24 hour post-dose record will also be used a the pre-dose record for the “Day 2” dose. In addition to 24 hour post-dose records, other situations may include pre-dose records for “Cycle 2 Day 1”, etc.</p>
 <p>In general, we will select the records of interest and then update the relative time variables for the duplicated records. In this case we will select where the nominal relative time to next dose is zero. (Note that we do not need to duplicate the first dose record since there is no prior dose.)</p>
 <p><code>DTYPE</code> is set to “COPY” for the duplicated records and the original <code>PCSEQ</code> value is retained. In this case we change “24h Post-dose” to “Pre-dose”. <code>ABLFL</code> is set to “Y” since these records will serve as baseline for the “Day 2” dose. <code>DOSEA</code> is set to <code>EXDOSE_next</code> and <code>PCRFTDTM</code> is set to <code>ADTM_next</code>.</p>
