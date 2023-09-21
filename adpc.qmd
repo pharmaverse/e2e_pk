@@ -55,7 +55,7 @@ library(pharmaversesdtm) # Contains example datasets from the CDISC pilot projec
 
 ## Next Load Specifications for Metacore
 
-We have saved our specifications in an Excel file and will load them into `{metacore}` with the `spec_to_metacore()` function.
+We have saved our specifications in an Excel file and will load them into `{metacore}` with the `spec_to_metacore()` function. The spec file can be found [here](https://github.com/pharmaverse/e2e_pk/blob/main/pk_spec.xlsx){target="_blank"}
 
 ```{r echo=TRUE, message=FALSE}
 #| label: Load Specs
@@ -639,7 +639,7 @@ adpc_aval <- adpc_nrrlt %>%
 ```
 
 
-### Dervie DTYPE Copy Records
+### Derive DTYPE Copy Records
 
 As mentioned above, the CDISC ADaM Implementation Guide for
 Non-compartmental Analysis uses duplicated records for analysis when a
