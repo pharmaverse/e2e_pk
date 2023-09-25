@@ -39,7 +39,6 @@ The source SDTM data will come from the CDISC pilot study data stored in `{pharm
 
 ```{r echo=TRUE, message=FALSE}
 #| label: Load Libraries
-# Load Libraries
 library(admiral)
 library(dplyr)
 library(lubridate)
@@ -47,21 +46,19 @@ library(stringr)
 library(metacore)
 library(metatools)
 library(xportr)
-
-library(pharmaversesdtm) # Contains example datasets from the CDISC pilot project or simulated
-
-
+library(pharmaversesdtm) 
 ```
 
 ## Next Load Specifications for Metacore
 
 We have saved our specifications in an Excel file and will load them into `{metacore}` with the `spec_to_metacore()` function. The spec file can be found [here](https://github.com/pharmaverse/e2e_pk/blob/main/pk_spec.xlsx){target="_blank"}
 
-```{r echo=TRUE, message=FALSE}
+```{r echo=TRUE}
 #| label: Load Specs
+#| include: false
 # ---- Load Specs for Metacore ----
 
-metacore <- suppressWarnings(spec_to_metacore("pk_spec.xlsx")) %>%
+metacore <- spec_to_metacore("pk_spec.xlsx") %>%
   select_dataset("ADPC")
 ```
 
@@ -80,22 +77,8 @@ data("vs")
 data("admiral_adsl")
 
 adsl <- admiral_adsl
-
-# When SAS datasets are imported into R using haven::read_sas(), missing
-# character values from SAS appear as "" characters in R, instead of appearing
-# as NA values. Further details can be obtained via the following link:
-# https://pharmaverse.github.io/admiral/cran-release/articles/admiral.html#handling-of-missing-values # nolint
-
-# Load EX
-
 ex <- convert_blanks_to_na(ex)
-
-# Load PC
-
 pc <- convert_blanks_to_na(pc)
-
-# Load VS for baseline height and weight
-
 vs <- convert_blanks_to_na(vs)
 
 # ---- Lookup tables ----
@@ -829,15 +812,13 @@ We use `{metacore}` to perform a number of checks on the data.  We will drop var
 
 ```{r}
 #| label: Metacore
+#| include: false
 # Final Steps, Select final variables and Add labels
-# This process will be based on your metadata, no example given for this reason
-# ...
 
 dir <- "./output"
 
 # Apply metadata and perform associated checks ----
 # uses {metatools}
-
 adpc <- adpc_prefinal %>%
   drop_unspec_vars(metacore) %>% # Drop unspecified variables from specs
   check_variables(metacore) %>% # Check all variables specified are present and no more
@@ -852,7 +833,7 @@ Using `{xportr}` we add variable labels and save a transport file.
 
 ```{r}
 #| label: xportr
-
+#| include: false
 adpc_xpt <- adpc %>%
   xportr_type(metacore) %>% # Coerce variable type to match spec
   xportr_length(metacore) %>% # Assigns SAS length from a variable level metadata
