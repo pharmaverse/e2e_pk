@@ -4,9 +4,27 @@ project:
 website:
   title: "PK End to End Examples"
   navbar:
-    left:
+    pinned: true
+    collapse: false
+    background: primary
+    search: true
+    right:
+      - icon: slack
+        href: https://app.slack.com/client/T028PB489D3/
+        aria-label: Slack
+      - icon: github
+        href: https://github.com/pharmaverse/e2e_pk
+        aria-label: Repository      
+  sidebar:
+    - id: sidebar
+      style: docked
+      collapse-level: 1
+      logo: images/pharmaverse.png
+      border: true
+      contents:
       - adppk.qmd
       - adpc.qmd
+
   favicon: images/pharmaverse-favicon.png
   
 
