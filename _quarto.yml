@@ -19,7 +19,7 @@ website:
     - id: sidebar
       style: docked
       collapse-level: 1
-      logo: images/admiral.png
+      logo: images/pharmaverse.png
       border: true
       contents:
       - adpc.qmd
