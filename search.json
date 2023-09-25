@@ -11,21 +11,21 @@
     "href": "adpc.html#first-load-libraries",
     "title": "ADPC Template",
     "section": "First Load Libraries",
-    "text": "First Load Libraries\nFirst we will load the libraries required for our project. We will use {admiral} for the creation of analysis data. {admiral} requires {dplyr}, {lubridate} and {stringr}. We will use {metacore} and {metatools} to store and manipulate metadata from our specifications. We will use {xportr} to perform checks on the final data and export to a transport file.\nThe source SDTM data will come from the CDISC pilot study data stored in {pharmaversesdtm}.\n\n# Load Libraries\nlibrary(admiral)\nlibrary(dplyr)\nlibrary(lubridate)\nlibrary(stringr)\nlibrary(metacore)\nlibrary(metatools)\nlibrary(xportr)\n\nlibrary(pharmaversesdtm) # Contains example datasets from the CDISC pilot project or simulated"
+    "text": "First Load Libraries\nFirst we will load the libraries required for our project. We will use {admiral} for the creation of analysis data. {admiral} requires {dplyr}, {lubridate} and {stringr}. We will use {metacore} and {metatools} to store and manipulate metadata from our specifications. We will use {xportr} to perform checks on the final data and export to a transport file.\nThe source SDTM data will come from the CDISC pilot study data stored in {pharmaversesdtm}.\n\nlibrary(admiral)\nlibrary(dplyr)\nlibrary(lubridate)\nlibrary(stringr)\nlibrary(metacore)\nlibrary(metatools)\nlibrary(xportr)\nlibrary(pharmaversesdtm)"
   },
   {
     "objectID": "adpc.html#next-load-specifications-for-metacore",
     "href": "adpc.html#next-load-specifications-for-metacore",
     "title": "ADPC Template",
     "section": "Next Load Specifications for Metacore",
-    "text": "Next Load Specifications for Metacore\nWe have saved our specifications in an Excel file and will load them into {metacore} with the spec_to_metacore() function. The spec file can be found here\n\n# ---- Load Specs for Metacore ----\n\nmetacore <- suppressWarnings(spec_to_metacore(\"pk_spec.xlsx\")) %>%\n  select_dataset(\"ADPC\")"
+    "text": "Next Load Specifications for Metacore\nWe have saved our specifications in an Excel file and will load them into {metacore} with the spec_to_metacore() function. The spec file can be found here"
   },
   {
     "objectID": "adpc.html#load-source-datasets",
     "href": "adpc.html#load-source-datasets",
     "title": "ADPC Template",
     "section": "Load Source Datasets",
-    "text": "Load Source Datasets\nWe will load are SDTM data from {pharmaversesdtm}. The main components of this will be exposure data from EX and pharmacokinetic concentration data from PC. We will use ADSL for baseline characteristics and we will derive additional baselines from vital signs VS.\n\n# ---- Load source datasets ----\n# Load PC, EX, VS, LB and ADSL\ndata(\"pc\")\ndata(\"ex\")\ndata(\"vs\")\n\ndata(\"admiral_adsl\")\n\nadsl <- admiral_adsl\n\n# When SAS datasets are imported into R using haven::read_sas(), missing\n# character values from SAS appear as \"\" characters in R, instead of appearing\n# as NA values. Further details can be obtained via the following link:\n# https://pharmaverse.github.io/admiral/cran-release/articles/admiral.html#handling-of-missing-values # nolint\n\n# Load EX\n\nex <- convert_blanks_to_na(ex)\n\n# Load PC\n\npc <- convert_blanks_to_na(pc)\n\n# Load VS for baseline height and weight\n\nvs <- convert_blanks_to_na(vs)\n\n# ---- Lookup tables ----\nparam_lookup <- tibble::tribble(\n  ~PCTESTCD, ~PARAMCD, ~PARAM, ~PARAMN,\n  \"XAN\", \"XAN\", \"Pharmacokinetic concentration of Xanomeline\", 1,\n  \"DOSE\", \"DOSE\", \"Xanomeline Patch Dose\", 2,\n)\n# ---- User defined functions ----\n\n# Here is an example of how you can create your own function that\n# operates on vectors, which can be used in `mutate`.\nformat_avalcat1n <- function(param, aval) {\n  case_when(\n    param == \"PKCONC\" & aval < 1 ~ 1,\n    param == \"PKCONC\" & aval >= 1 ~ 2,\n    T ~ NA_real_\n  )\n}"
+    "text": "Load Source Datasets\nWe will load are SDTM data from {pharmaversesdtm}. The main components of this will be exposure data from EX and pharmacokinetic concentration data from PC. We will use ADSL for baseline characteristics and we will derive additional baselines from vital signs VS.\n\n# ---- Load source datasets ----\n# Load PC, EX, VS, LB and ADSL\ndata(\"pc\")\ndata(\"ex\")\ndata(\"vs\")\n\ndata(\"admiral_adsl\")\n\nadsl <- admiral_adsl\nex <- convert_blanks_to_na(ex)\npc <- convert_blanks_to_na(pc)\nvs <- convert_blanks_to_na(vs)\n\n# ---- Lookup tables ----\nparam_lookup <- tibble::tribble(\n  ~PCTESTCD, ~PARAMCD, ~PARAM, ~PARAMN,\n  \"XAN\", \"XAN\", \"Pharmacokinetic concentration of Xanomeline\", 1,\n  \"DOSE\", \"DOSE\", \"Xanomeline Patch Dose\", 2,\n)\n# ---- User defined functions ----\n\n# Here is an example of how you can create your own function that\n# operates on vectors, which can be used in `mutate`.\nformat_avalcat1n <- function(param, aval) {\n  case_when(\n    param == \"PKCONC\" & aval < 1 ~ 1,\n    param == \"PKCONC\" & aval >= 1 ~ 2,\n    T ~ NA_real_\n  )\n}"
   },
   {
     "objectID": "adpc.html#derivations",
@@ -39,14 +39,14 @@
     "href": "adpc.html#check-data-with-metacore",
     "title": "ADPC Template",
     "section": "Check Data With Metacore",
-    "text": "Check Data With Metacore\nWe use {metacore} to perform a number of checks on the data. We will drop variables not in the specs and make sure all the variables from the specs are included.\n\n# Final Steps, Select final variables and Add labels\n# This process will be based on your metadata, no example given for this reason\n# ...\n\ndir <- \"./output\"\n\n# Apply metadata and perform associated checks ----\n# uses {metatools}\n\nadpc <- adpc_prefinal %>%\n  drop_unspec_vars(metacore) %>% # Drop unspecified variables from specs\n  check_variables(metacore) %>% # Check all variables specified are present and no more\n  check_ct_data(metacore) %>% # Checks all variables with CT only contain values within the CT\n  order_cols(metacore) %>% # Orders the columns according to the spec\n  sort_by_key(metacore) # Sorts the rows by the sort keys\n\nNo missing or extra variables"
+    "text": "Check Data With Metacore\nWe use {metacore} to perform a number of checks on the data. We will drop variables not in the specs and make sure all the variables from the specs are included."
   },
   {
     "objectID": "adpc.html#apply-labels-and-formats-with-xportr",
     "href": "adpc.html#apply-labels-and-formats-with-xportr",
     "title": "ADPC Template",
     "section": "Apply Labels and Formats with xportr",
-    "text": "Apply Labels and Formats with xportr\nUsing {xportr} we add variable labels and save a transport file.\n\nadpc_xpt <- adpc %>%\n  xportr_type(metacore) %>% # Coerce variable type to match spec\n  xportr_length(metacore) %>% # Assigns SAS length from a variable level metadata\n  xportr_label(metacore) %>% # Assigns variable label from metacore specifications\n  xportr_format(metacore) %>% # Assigns variable format from metacore specifications\n  xportr_df_label(metacore) %>% # Assigns dataset label from metacore specifications\n  xportr_write(file.path(dir, \"adpc.xpt\")) # Write xpt v5 transport file\n\n\n\n\n── Variable type mismatches found. ──\n\n\n\n\n\n✔ 1 variables coerced"
+    "text": "Apply Labels and Formats with xportr\nUsing {xportr} we add variable labels and save a transport file."
   },
   {
     "objectID": "adpc.html#save-final-output",
