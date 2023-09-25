@@ -4,4 +4,4 @@
 
 This will be location for developing end to end examples for PK
 
-Examples will be published to the [gh-pages website](https://pharmaverse.github.io/e2e_pk/){target="_blank"}
+Examples will be published to the [gh-pages website](https://pharmaverse.github.io/e2e_pk/)
