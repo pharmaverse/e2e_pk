@@ -55,7 +55,7 @@ We have saved our specifications in an Excel file and will load them into `{meta
 
 ```{r echo=TRUE}
 #| label: Load Specs
-#| include: false
+#| warning: false
 # ---- Load Specs for Metacore ----
 
 metacore <- spec_to_metacore("pk_spec.xlsx") %>%
@@ -812,7 +812,7 @@ We use `{metacore}` to perform a number of checks on the data.  We will drop var
 
 ```{r}
 #| label: Metacore
-#| include: false
+#| warning: false
 # Final Steps, Select final variables and Add labels
 
 dir <- "./output"
@@ -833,7 +833,7 @@ Using `{xportr}` we add variable labels and save a transport file.
 
 ```{r}
 #| label: xportr
-#| include: false
+#| warning: false
 adpc_xpt <- adpc %>%
   xportr_type(metacore) %>% # Coerce variable type to match spec
   xportr_length(metacore) %>% # Assigns SAS length from a variable level metadata
