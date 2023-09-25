@@ -10,7 +10,7 @@ website:
     search: true
     right:
       - icon: slack
-        href: https://app.slack.com/client/T028PB489D3/
+        href: https://app.slack.com/client/C054QCLPEKY/
         aria-label: Slack
       - icon: github
         href: https://github.com/pharmaverse/e2e_pk
@@ -19,11 +19,11 @@ website:
     - id: sidebar
       style: docked
       collapse-level: 1
-      logo: images/pharmaverse.png
+      logo: images/admiral.png
       border: true
       contents:
-      - adppk.qmd
       - adpc.qmd
+      - adppk.qmd
 
   favicon: images/pharmaverse-favicon.png
   
