@@ -10,7 +10,7 @@ website:
     search: true
     right:
       - icon: slack
-        href: https://app.slack.com/client/C054QCLPEKY/
+        href: https://app.slack.com/client/T028PB489D3/
         aria-label: Slack
       - icon: github
         href: https://github.com/pharmaverse/e2e_pk
