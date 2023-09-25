@@ -11,7 +11,7 @@
     "href": "adpc.html#first-load-libraries",
     "title": "ADPC Template",
     "section": "First Load Libraries",
-    "text": "First Load Libraries\nFirst we will load the libraries required for our project. We will use {admiral} for the creation of analysis data. {admiral} requires {dplyr}, {lubridate} and {stringer}. We will use {metacore} and {metatools} to store and manipulate metadata from our specifications. We will use {xportr} to perform checks on the final data and export to a transport file.\nThe source SDTM data will come from the CDISC pilot study data stored in {pharmaversesdtm}.\n\n# Load Libraries\nlibrary(admiral)\nlibrary(dplyr)\nlibrary(lubridate)\nlibrary(stringr)\nlibrary(metacore)\nlibrary(metatools)\nlibrary(xportr)\n\nlibrary(pharmaversesdtm) # Contains example datasets from the CDISC pilot project or simulated"
+    "text": "First Load Libraries\nFirst we will load the libraries required for our project. We will use {admiral} for the creation of analysis data. {admiral} requires {dplyr}, {lubridate} and {stringr}. We will use {metacore} and {metatools} to store and manipulate metadata from our specifications. We will use {xportr} to perform checks on the final data and export to a transport file.\nThe source SDTM data will come from the CDISC pilot study data stored in {pharmaversesdtm}.\n\n# Load Libraries\nlibrary(admiral)\nlibrary(dplyr)\nlibrary(lubridate)\nlibrary(stringr)\nlibrary(metacore)\nlibrary(metatools)\nlibrary(xportr)\n\nlibrary(pharmaversesdtm) # Contains example datasets from the CDISC pilot project or simulated"
   },
   {
     "objectID": "adpc.html#next-load-specifications-for-metacore",
@@ -58,9 +58,9 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "About",
+    "title": "End to End Examples for PK",
     "section": "",
-    "text": "End to End Examples for PK\nThis site includes end to end examples for PK using {admiral} and other Pharmaverse tools\n\n{pharmaversesdtm} – Sample Pharmaverse CDISC SDTM data\n\n\n\n\n\n\n\n{admiral} – Use to build CDISC analysis data\n\n\n\n\n\n\n\n{metacore} – Create and manage metadata for the analysis data\n\n\n\n\n\n\n\n{metatools} – Work with metadata to derive variables and perform checks\n\n\n\n\n\n\n\n{xportr} – Perform checks on data and export to transport file"
+    "text": "This site includes end to end examples for PK using {admiral} and other Pharmaverse tools\n\n{admiral} – Use to build CDISC analysis data\n\n\n\n\n\n\n\n{pharmaversesdtm} – Sample Pharmaverse CDISC SDTM data\n\n\n\n\n\n\n\n{metacore} – Create and manage metadata for the analysis data\n\n\n\n\n\n\n\n{metatools} – Work with metadata to derive variables and perform checks\n\n\n\n\n\n\n\n{xportr} – Perform checks on data and export to transport file"
   },
   {
     "objectID": "about.html",
@@ -81,7 +81,7 @@
     "href": "adppk.html#first-load-libraries",
     "title": "ADPPK Template",
     "section": "First Load Libraries",
-    "text": "First Load Libraries\nFirst we will load the libraries required for our project. We will use {admiral} for the creation of analysis data. {admiral} requires {dplyr}, {lubridate} and {stringer}. We will use {metacore} and {metatools} to store and manipulate metadata from our specifications. We will use {xportr} to perform checks on the final data and export to a transport file.\nThe source SDTM data will come from the CDISC pilot study data stored in {pharmaversesdtm}.\n\n# Load Libraries\nlibrary(admiral)\nlibrary(dplyr)\nlibrary(lubridate)\nlibrary(stringr)\nlibrary(metacore)\nlibrary(metatools)\nlibrary(xportr)\nlibrary(readr)\n\nlibrary(pharmaversesdtm) # Contains example datasets from the CDISC pilot project or simulated"
+    "text": "First Load Libraries\nFirst we will load the libraries required for our project. We will use {admiral} for the creation of analysis data. {admiral} requires {dplyr}, {lubridate} and {stringr}. We will use {metacore} and {metatools} to store and manipulate metadata from our specifications. We will use {xportr} to perform checks on the final data and export to a transport file.\nThe source SDTM data will come from the CDISC pilot study data stored in {pharmaversesdtm}.\n\n# Load Libraries\nlibrary(admiral)\nlibrary(dplyr)\nlibrary(lubridate)\nlibrary(stringr)\nlibrary(metacore)\nlibrary(metatools)\nlibrary(xportr)\nlibrary(readr)\n\nlibrary(pharmaversesdtm) # Contains example datasets from the CDISC pilot project or simulated"
   },
   {
     "objectID": "adppk.html#next-load-specifications-for-metacore",
