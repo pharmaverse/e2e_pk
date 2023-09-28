@@ -17,8 +17,6 @@ library(readr)
 library(pharmaversesdtm) # Contains example datasets from the CDISC pilot project or simulated
 # ---- Load Specs for Metacore ----
 
-
-
 metacore <- suppressWarnings(spec_to_metacore("pk_spec.xlsx")) %>%
   select_dataset("ADPPK")
 
@@ -35,36 +33,12 @@ data("vs")
 data("lb")
 
 data("admiral_adsl")
-
 adsl <- admiral_adsl
 
-# When SAS datasets are imported into R using haven::read_sas(), missing
-# character values from SAS appear as "" characters in R, instead of appearing
-# as NA values. Further details can be obtained via the following link:
-# https://pharmaverse.github.io/admiral/cran-release/articles/admiral.html#handling-of-missing-values # nolint
-
-# Load EX
-
 ex <- convert_blanks_to_na(ex)
-
-# Load PC
-
 pc <- convert_blanks_to_na(pc)
-
-# Load VS for baseline height and weight
-
 vs <- convert_blanks_to_na(vs)
-
-# Load LB for baseline lab values
-
 lb <- convert_blanks_to_na(lb)
-
-# ---- Lookup tables ----
-param_lookup <- tibble::tribble(
-  ~PCTESTCD, ~PARAMCD, ~PARAM, ~PARAMN,
-  "XAN", "XAN", "Pharmacokinetic concentration of Xanomeline", 1,
-  "DOSE", "DOSE", "Xanomeline Patch Dose", 2,
-)
 
 # ---- Derivations ----
 
@@ -314,6 +288,7 @@ adppk_aval <- adppk_aprlt %>%
     ),
     # Derive DV and AVAL
     DV = PCSTRESN,
+    DVID = PCTESTCD,
     AVAL = DV,
     DVL = case_when(
       DV != 0 ~ log(DV),
@@ -329,9 +304,13 @@ adppk_aval <- adppk_aprlt %>%
       EVID == 1 ~ NA_character_,
       TRUE ~ PCSTRESU
     ),
+    RLTU = "h",
+    USTRESC = PCSTRESC,
     UDTC = format_ISO8601(ADTM),
     II = if_else(EVID == 1, 1, 0),
-    SS = if_else(EVID == 1, 1, 0)
+    SS = if_else(EVID == 1, 1, 0),
+    ADDL = 0,
+    OCC = 1,
   )
 
 # ---- Add ASEQ ----
@@ -344,23 +323,15 @@ adppk_aseq <- adppk_aval %>%
     order = exprs(AFRLT, EVID),
     check_type = "error"
   ) %>%
-  # Derive PARAM and PARAMN
-  derive_vars_merged(dataset_add = select(param_lookup, -PCTESTCD), by_vars = exprs(PARAMCD)) %>%
   mutate(
     PROJID = DRUG,
-    PROJIDN = 1
-  ) %>%
-  # Remove temporary variables
-  select(
-    -DOMAIN, -starts_with("min"), -starts_with("max"), -starts_with("EX"),
-    -starts_with("PC"), -ends_with("first"), -ends_with("prev"),
-    -ends_with("DTM"), -ends_with("DT"), -ends_with("TM"), -starts_with("VISIT"),
-    -starts_with("AVISIT"), -starts_with("PARAM"),
-    -ends_with("TMF"), -starts_with("TRT"), -starts_with("ATPT"), -DRUG
-  )
+    PROJIDN = 1,
+    PART = 1,
+  ) 
 
 #---- Derive Covariates ----
 # Include numeric values for STUDYIDN, USUBJIDN, SEXN, RACEN etc.
+# Use {metatools} to decode variables
 
 covar <- adsl %>%
   create_var_from_codelist(metacore, input_var = STUDYID, out_var = STUDYIDN) %>% 
@@ -379,16 +350,13 @@ covar <- adsl %>%
     SUBJIDN = as.numeric(SUBJID),
     ROUTE = unique(ex$EXROUTE),
     FORM = unique(ex$EXDOSFRM),
-    REGION1N = COUNTRYN
+    REGION1 = COUNTRY,
+    REGION1N = COUNTRYN,
+    SUBJTYPC = "Volunteer",
   ) %>%
   create_var_from_codelist(metacore, input_var = FORM, out_var = FORMN) %>% 
   create_var_from_codelist(metacore, input_var = ROUTE, out_var = ROUTEN) %>% 
-  select(
-    STUDYID, STUDYIDN, SITEID, SITEIDN, USUBJID, USUBJIDN,
-    SUBJID, SUBJIDN, AGE, SEX, SEXN, COHORT, COHORTC, ROUTE, ROUTEN,
-    RACE, RACEN, AETHNIC, AETHNICN, FORM, FORMN, COUNTRY, COUNTRYN,
-    REGION1, REGION1N
-  )
+  create_var_from_codelist(metacore, input_var = SUBJTYPC, out_var = SUBJTYP) 
 
 #---- Derive additional baselines from VS and LB ----
 
@@ -438,12 +406,17 @@ covar_vslb <- covar %>%
 
 adppk_prefinal <- adppk_aseq %>%
   derive_vars_merged(
-    dataset_add = covar_vslb,
+    dataset_add = select(covar_vslb, !!!negate_vars(adsl_vars)),
     by_vars = exprs(STUDYID, USUBJID)
   ) %>%
   arrange(STUDYIDN, USUBJIDN, AFRLT, EVID) %>%
-  mutate(RECSEQ = row_number())
-
+  # Add RECSEQ
+  # Exclude records if needed
+  mutate(RECSEQ = row_number(),
+         EXCLFCOM = "None") %>% 
+  create_var_from_codelist(metacore, input_var = DVID, out_var = DVIDN) %>% 
+  create_var_from_codelist(metacore, input_var = EXCLFCOM, out_var = EXCLF)
+  
 # Final Steps, Select final variables and Add labels
 # This process will be based on your metadata, no example given for this reason
 # ...
@@ -455,7 +428,7 @@ dir <- "./output"
 
 adppk <- adppk_prefinal %>%
   drop_unspec_vars(metacore) %>% # Drop unspecified variables from specs
-  #check_variables(metacore) %>% # Check all variables specified are present and no more
+  check_variables(metacore) %>% # Check all variables specified are present and no more
   check_ct_data(metacore) %>% # Checks all variables with CT only contain values within the CT
   order_cols(metacore) %>% # Orders the columns according to the spec
   sort_by_key(metacore) # Sorts the rows by the sort keys
@@ -467,6 +440,7 @@ adppk_xpt <- adppk %>%
   xportr_format(metacore) %>% # Assigns variable format from metacore specifications
   xportr_df_label(metacore) %>% # Assigns dataset label from metacore specifications
   xportr_write(file.path(dir, "adppk.xpt")) # Write xpt v5 transport file
+
 
 # ---- Save output ----
 

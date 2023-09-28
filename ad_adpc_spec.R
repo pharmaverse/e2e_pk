@@ -13,21 +13,18 @@ library(stringr)
 library(metacore)
 library(metatools)
 library(xportr)
-
-library(pharmaversesdtm) # Contains example datasets from the CDISC pilot project or simulated
+library(pharmaversesdtm) 
 
 # ---- Load Specs for Metacore ----
 
 metacore <- spec_to_metacore("pk_spec.xlsx") %>%
   select_dataset("ADPC")
 
-
 # ---- Load source datasets ----
 
 # Use e.g. haven::read_sas to read in .sas7bdat, or other suitable functions
 # as needed and assign to the variables below.
 # For illustration purposes read in admiral test data
-
 
 # Load PC, EX, VS and ADSL
 data("pc")
@@ -38,41 +35,9 @@ data("admiral_adsl")
 
 adsl <- admiral_adsl
 
-# When SAS datasets are imported into R using haven::read_sas(), missing
-# character values from SAS appear as "" characters in R, instead of appearing
-# as NA values. Further details can be obtained via the following link:
-# https://pharmaverse.github.io/admiral/cran-release/articles/admiral.html#handling-of-missing-values # nolint
-
-# Load EX
-
 ex <- convert_blanks_to_na(ex)
-
-# Load PC
-
 pc <- convert_blanks_to_na(pc)
-
-# Load VS for baseline height and weight
-
 vs <- convert_blanks_to_na(vs)
-
-# ---- Lookup tables ----
-param_lookup <- tibble::tribble(
-  ~PCTESTCD, ~PARAMCD, ~PARAM, ~PARAMN,
-  "XAN", "XAN", "Pharmacokinetic concentration of Xanomeline", 1,
-  "DOSE", "DOSE", "Xanomeline Patch Dose", 2,
-)
-
-# ---- User defined functions ----
-
-# Here is an example of how you can create your own function that
-# operates on vectors, which can be used in `mutate`.
-format_avalcat1n <- function(param, aval) {
-  case_when(
-    param == "PKCONC" & aval < 1 ~ 1,
-    param == "PKCONC" & aval >= 1 ~ 2,
-    T ~ NA_real_
-  )
-}
 
 # ---- Derivations ----
 
@@ -467,16 +432,10 @@ adpc_aseq <- adpc_chg %>%
     order = exprs(ADTM, BASETYPE, EVID, AVISITN, ATPTN, DTYPE),
     check_type = "error"
   ) %>%
-  # Remove temporary variables
-  select(
-    -DOMAIN, -PCSEQ, -starts_with("min"),
-    -starts_with("max"), -starts_with("EX"), -ends_with("next"),
-    -ends_with("prev"), -DRUG, -EVID, -AXRLT, -NXRLT, -VISITDY
-  ) %>%
-  # Derive PARAM and PARAMN
-  derive_vars_merged(dataset_add = select(param_lookup, -PCTESTCD), by_vars = exprs(PARAMCD))
-
-
+  # Derive PARAM and PARAMN using metatools
+  create_var_from_codelist(metacore, input_var = PARAMCD, out_var = PARAM) %>% 
+  create_var_from_codelist(metacore, input_var = PARAMCD, out_var = PARAMN) 
+  
 #---- Derive additional baselines from VS ----
 
 adpc_baselines <- adpc_aseq %>%
