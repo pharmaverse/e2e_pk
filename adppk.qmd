@@ -445,8 +445,6 @@ adppk_aseq <- adppk_aval %>%
     order = exprs(AFRLT, EVID),
     check_type = "error"
   ) %>%
-  # Derive PARAM and PARAMN
-  derive_vars_merged(dataset_add = select(param_lookup, -PCTESTCD), by_vars = exprs(PARAMCD)) %>%
   mutate(
     PROJID = DRUG,
     PROJIDN = 1,
