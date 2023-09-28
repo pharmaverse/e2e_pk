@@ -58,20 +58,12 @@ data("vs")
 data("lb")
 
 data("admiral_adsl")
-
 adsl <- admiral_adsl
 
 ex <- convert_blanks_to_na(ex)
 pc <- convert_blanks_to_na(pc)
 vs <- convert_blanks_to_na(vs)
 lb <- convert_blanks_to_na(lb)
-
-# ---- Lookup tables ----
-param_lookup <- tibble::tribble(
-  ~PCTESTCD, ~PARAMCD, ~PARAM, ~PARAMN,
-  "XAN", "XAN", "Pharmacokinetic concentration of Xanomeline", 1,
-  "DOSE", "DOSE", "Xanomeline Patch Dose", 2,
-)
 ```
 
 ## Derivations
@@ -139,7 +131,6 @@ using `dplyr::mutate`.
 
 ```{r}
 #| label: Dosing
-
 # ---- Get dosing information ----
 
 ex_dates <- ex %>%
@@ -188,7 +179,6 @@ result in nominal time being incremented by 12 hours.
 
 ```{r}
 #| label: Expand
-
 # ---- Expand dosing records between start and end dates ----
 # Updated function includes nominal_time parameter
 
@@ -570,7 +560,6 @@ adppk_prefinal <- adppk_aseq %>%
          EXCLFCOM = "None") %>% 
   create_var_from_codelist(metacore, input_var = DVID, out_var = DVIDN) %>% 
   create_var_from_codelist(metacore, input_var = EXCLFCOM, out_var = EXCLF)
-
 ```
 
 ## Check Data With Metacore
@@ -583,7 +572,6 @@ We use `{metacore}` to perform a number of checks on the data.  We will drop var
 # Final Steps, Select final variables and Add labels
 # This process will be based on your metadata, no example given for this reason
 # ...
-
 dir <- "./output"
 
 # Apply metadata and perform associated checks ----
@@ -620,14 +608,10 @@ Finally we save the final output.  We will also create a `CSV` file for the mode
 ```{r}
 #| label: Save
 # ---- Save output ----
-
 saveRDS(adppk, file = file.path(dir, "adppk.rds"), compress = "bzip2")
 
 # Write CSV
 write_csv(adppk_xpt, "./output/adppk.csv")
-
-
-
 ```
 
 # Example Scripts {#example}
