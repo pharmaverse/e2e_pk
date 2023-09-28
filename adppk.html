@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>PK End to End Examples - ADPPK Template</title>
+<title>End to End Examples for PK - ADPPK Template</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -136,7 +136,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
     <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">PK End to End Examples</span>
+    <span class="navbar-title">End to End Examples for PK</span>
     </a>
   </div>
           <ul class="navbar-nav navbar-nav-scroll ms-auto">
@@ -196,7 +196,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#first-load-libraries" id="toc-first-load-libraries" class="nav-link active" data-scroll-target="#first-load-libraries">First Load Libraries</a></li>
+  <li><a href="#first-load-packages" id="toc-first-load-packages" class="nav-link active" data-scroll-target="#first-load-packages">First Load Packages</a></li>
   <li><a href="#next-load-specifications-for-metacore" id="toc-next-load-specifications-for-metacore" class="nav-link" data-scroll-target="#next-load-specifications-for-metacore">Next Load Specifications for Metacore</a></li>
   <li><a href="#load-source-datasets" id="toc-load-source-datasets" class="nav-link" data-scroll-target="#load-source-datasets">Load Source Datasets</a></li>
   <li><a href="#derivations" id="toc-derivations" class="nav-link" data-scroll-target="#derivations">Derivations</a>
@@ -245,12 +245,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </header>
 
 <p>The Population PK Analysis Data (ADPPK) follows the forthcoming CDISC Implementation Guide (<a href="https://www.cdisc.org/adam-poppk-implementation-guide-v1-0" class="uri">https://www.cdisc.org/adam-poppk-implementation-guide-v1-0</a>). Population PK models generally make use of nonlinear mixed effects models that require numeric variables. The data used in the models will include both dosing and concentration records, relative time variables, and numeric covariate variables. A <code>DV</code> or dependent variable is often expected. This is equivalent to the ADaM <code>AVAL</code> variable and will be included in addition to <code>AVAL</code> for ADPPK.</p>
-<section id="first-load-libraries" class="level2">
-<h2 class="anchored" data-anchor-id="first-load-libraries">First Load Libraries</h2>
-<p>First we will load the libraries required for our project. We will use <code>{admiral}</code> for the creation of analysis data. <code>{admiral}</code> requires <code>{dplyr}</code>, <code>{lubridate}</code> and <code>{stringr}</code>. We will use <code>{metacore}</code> and <code>{metatools}</code> to store and manipulate metadata from our specifications. We will use <code>{xportr}</code> to perform checks on the final data and export to a transport file.</p>
+<section id="first-load-packages" class="level2">
+<h2 class="anchored" data-anchor-id="first-load-packages">First Load Packages</h2>
+<p>First we will load the packages required for our project. We will use <code>{admiral}</code> for the creation of analysis data. <code>{admiral}</code> requires <code>{dplyr}</code>, <code>{lubridate}</code> and <code>{stringr}</code>. We will use <code>{metacore}</code> and <code>{metatools}</code> to store and manipulate metadata from our specifications. We will use <code>{xportr}</code> to perform checks on the final data and export to a transport file.</p>
 <p>The source SDTM data will come from the CDISC pilot study data stored in <code>{pharmaversesdtm}</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load Libraries</span></span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load Packages</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(admiral)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
@@ -259,8 +259,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(metatools)</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(xportr)</span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pharmaversesdtm) <span class="co"># Contains example datasets from the CDISC pilot project or simulated</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pharmaversesdtm) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="next-load-specifications-for-metacore" class="level2">
@@ -268,9 +267,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>We have saved our specifications in an Excel file and will load them into <code>{metacore}</code> with the <code>spec_to_metacore()</code> function. The spec file can be found <a href="https://github.com/pharmaverse/e2e_pk/blob/main/pk_spec.xlsx" target="_blank">here</a></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- Load Specs for Metacore ----</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>metacore <span class="ot">&lt;-</span> <span class="fu">suppressWarnings</span>(<span class="fu">spec_to_metacore</span>(<span class="st">"pk_spec.xlsx"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select_dataset</span>(<span class="st">"ADPPK"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>metacore <span class="ot">&lt;-</span> <span class="fu">spec_to_metacore</span>(<span class="st">"pk_spec.xlsx"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select_dataset</span>(<span class="st">"ADPPK"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="load-source-datasets" class="level2">
@@ -288,33 +286,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>adsl <span class="ot">&lt;-</span> admiral_adsl</span>
 <span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co"># When SAS datasets are imported into R using haven::read_sas(), missing</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co"># character values from SAS appear as "" characters in R, instead of appearing</span></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="co"># as NA values. Further details can be obtained via the following link:</span></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="co"># https://pharmaverse.github.io/admiral/cran-release/articles/admiral.html#handling-of-missing-values # nolint</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>ex <span class="ot">&lt;-</span> <span class="fu">convert_blanks_to_na</span>(ex)</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>pc <span class="ot">&lt;-</span> <span class="fu">convert_blanks_to_na</span>(pc)</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>vs <span class="ot">&lt;-</span> <span class="fu">convert_blanks_to_na</span>(vs)</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>lb <span class="ot">&lt;-</span> <span class="fu">convert_blanks_to_na</span>(lb)</span>
 <span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Load EX</span></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>ex <span class="ot">&lt;-</span> <span class="fu">convert_blanks_to_na</span>(ex)</span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Load PC</span></span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>pc <span class="ot">&lt;-</span> <span class="fu">convert_blanks_to_na</span>(pc)</span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Load VS for baseline height and weight</span></span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>vs <span class="ot">&lt;-</span> <span class="fu">convert_blanks_to_na</span>(vs)</span>
-<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Load LB for baseline lab values</span></span>
-<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>lb <span class="ot">&lt;-</span> <span class="fu">convert_blanks_to_na</span>(lb)</span>
-<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- Lookup tables ----</span></span>
-<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>param_lookup <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">tribble</span>(</span>
-<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span>PCTESTCD, <span class="sc">~</span>PARAMCD, <span class="sc">~</span>PARAM, <span class="sc">~</span>PARAMN,</span>
-<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>  <span class="st">"XAN"</span>, <span class="st">"XAN"</span>, <span class="st">"Pharmacokinetic concentration of Xanomeline"</span>, <span class="dv">1</span>,</span>
-<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>  <span class="st">"DOSE"</span>, <span class="st">"DOSE"</span>, <span class="st">"Xanomeline Patch Dose"</span>, <span class="dv">2</span>,</span>
-<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- Lookup tables ----</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>param_lookup <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">tribble</span>(</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span>PCTESTCD, <span class="sc">~</span>PARAMCD, <span class="sc">~</span>PARAM, <span class="sc">~</span>PARAMN,</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>  <span class="st">"XAN"</span>, <span class="st">"XAN"</span>, <span class="st">"Pharmacokinetic concentration of Xanomeline"</span>, <span class="dv">1</span>,</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>  <span class="st">"DOSE"</span>, <span class="st">"DOSE"</span>, <span class="st">"Xanomeline Patch Dose"</span>, <span class="dv">2</span>,</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="derivations" class="level2">
@@ -323,7 +305,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3 class="anchored" data-anchor-id="derive-pc-dates">Derive PC Dates</h3>
 <p>At this step, it may be useful to join <code>ADSL</code> to your <code>PC</code> and <code>EX</code> domains as well. Only the <code>ADSL</code> variables used for derivations are selected at this step. The rest of the relevant <code>ADSL</code> variables will be added later.</p>
 <p>In this case we will keep <code>TRTSDT</code>/<code>TRTSDTM</code> for day derivation and <code>TRT01P</code>/<code>TRT01A</code> for planned and actual treatments.</p>
-<p>In this segment we will use the <code>{admiral}</code> function <code>derive_vars_merged()</code> to join the <code>ADSL</code> variables and the following <code>{admiral}</code> functions to derive analysis dates, times and days: <code>derive_vars_dtm()</code>, <code>derive_vars_dtm_to_dt()</code>, <code>derive_vars_dtm_to_tm()</code>, <code>derive_vars_dy()</code>. We will also create <code>NFRLT</code> for <code>PC</code> data based on <code>PCTPTNUM</code>. We will create an event ID (<code>EVID</code>) of 0 for concentration records and 1 for dosing records.</p>
+<p>In this segment we will use <code>derive_vars_merged()</code> to join the <code>ADSL</code> variables and the following <code>{admiral}</code> functions to derive analysis dates, times and days:</p>
+<ul>
+<li><code>derive_vars_dtm()</code></li>
+<li><code>derive_vars_dtm_to_dt()</code></li>
+<li><code>derive_vars_dtm_to_tm()</code></li>
+<li><code>derive_vars_dy()</code></li>
+</ul>
+<p>We will also create <code>NFRLT</code> for <code>PC</code> data based on <code>PCTPTNUM</code>. We will create an event ID (<code>EVID</code>) of 0 for concentration records and 1 for dosing records.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- Derivations ----</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -604,25 +593,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb11-42"><a href="#cb11-42" aria-hidden="true" tabindex="-1"></a>    ),</span>
 <span id="cb11-43"><a href="#cb11-43" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Derive DV and AVAL</span></span>
 <span id="cb11-44"><a href="#cb11-44" aria-hidden="true" tabindex="-1"></a>    <span class="at">DV =</span> PCSTRESN,</span>
-<span id="cb11-45"><a href="#cb11-45" aria-hidden="true" tabindex="-1"></a>    <span class="at">AVAL =</span> DV,</span>
-<span id="cb11-46"><a href="#cb11-46" aria-hidden="true" tabindex="-1"></a>    <span class="at">DVL =</span> <span class="fu">case_when</span>(</span>
-<span id="cb11-47"><a href="#cb11-47" aria-hidden="true" tabindex="-1"></a>      DV <span class="sc">!=</span> <span class="dv">0</span> <span class="sc">~</span> <span class="fu">log</span>(DV),</span>
-<span id="cb11-48"><a href="#cb11-48" aria-hidden="true" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="cn">NA_real_</span></span>
-<span id="cb11-49"><a href="#cb11-49" aria-hidden="true" tabindex="-1"></a>    ),</span>
-<span id="cb11-50"><a href="#cb11-50" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Derive MDV</span></span>
-<span id="cb11-51"><a href="#cb11-51" aria-hidden="true" tabindex="-1"></a>    <span class="at">MDV =</span> <span class="fu">case_when</span>(</span>
-<span id="cb11-52"><a href="#cb11-52" aria-hidden="true" tabindex="-1"></a>      EVID <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
-<span id="cb11-53"><a href="#cb11-53" aria-hidden="true" tabindex="-1"></a>      <span class="fu">is.na</span>(DV) <span class="sc">~</span> <span class="dv">1</span>,</span>
-<span id="cb11-54"><a href="#cb11-54" aria-hidden="true" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="dv">0</span></span>
-<span id="cb11-55"><a href="#cb11-55" aria-hidden="true" tabindex="-1"></a>    ),</span>
-<span id="cb11-56"><a href="#cb11-56" aria-hidden="true" tabindex="-1"></a>    <span class="at">AVALU =</span> <span class="fu">case_when</span>(</span>
-<span id="cb11-57"><a href="#cb11-57" aria-hidden="true" tabindex="-1"></a>      EVID <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="cn">NA_character_</span>,</span>
-<span id="cb11-58"><a href="#cb11-58" aria-hidden="true" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> PCSTRESU</span>
-<span id="cb11-59"><a href="#cb11-59" aria-hidden="true" tabindex="-1"></a>    ),</span>
-<span id="cb11-60"><a href="#cb11-60" aria-hidden="true" tabindex="-1"></a>    <span class="at">UDTC =</span> <span class="fu">format_ISO8601</span>(ADTM),</span>
-<span id="cb11-61"><a href="#cb11-61" aria-hidden="true" tabindex="-1"></a>    <span class="at">II =</span> <span class="fu">if_else</span>(EVID <span class="sc">==</span> <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
-<span id="cb11-62"><a href="#cb11-62" aria-hidden="true" tabindex="-1"></a>    <span class="at">SS =</span> <span class="fu">if_else</span>(EVID <span class="sc">==</span> <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
-<span id="cb11-63"><a href="#cb11-63" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-45"><a href="#cb11-45" aria-hidden="true" tabindex="-1"></a>    <span class="at">DVID =</span> PCTESTCD,</span>
+<span id="cb11-46"><a href="#cb11-46" aria-hidden="true" tabindex="-1"></a>    <span class="at">AVAL =</span> DV,</span>
+<span id="cb11-47"><a href="#cb11-47" aria-hidden="true" tabindex="-1"></a>    <span class="at">DVL =</span> <span class="fu">case_when</span>(</span>
+<span id="cb11-48"><a href="#cb11-48" aria-hidden="true" tabindex="-1"></a>      DV <span class="sc">!=</span> <span class="dv">0</span> <span class="sc">~</span> <span class="fu">log</span>(DV),</span>
+<span id="cb11-49"><a href="#cb11-49" aria-hidden="true" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="cn">NA_real_</span></span>
+<span id="cb11-50"><a href="#cb11-50" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb11-51"><a href="#cb11-51" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Derive MDV</span></span>
+<span id="cb11-52"><a href="#cb11-52" aria-hidden="true" tabindex="-1"></a>    <span class="at">MDV =</span> <span class="fu">case_when</span>(</span>
+<span id="cb11-53"><a href="#cb11-53" aria-hidden="true" tabindex="-1"></a>      EVID <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb11-54"><a href="#cb11-54" aria-hidden="true" tabindex="-1"></a>      <span class="fu">is.na</span>(DV) <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb11-55"><a href="#cb11-55" aria-hidden="true" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="dv">0</span></span>
+<span id="cb11-56"><a href="#cb11-56" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb11-57"><a href="#cb11-57" aria-hidden="true" tabindex="-1"></a>    <span class="at">AVALU =</span> <span class="fu">case_when</span>(</span>
+<span id="cb11-58"><a href="#cb11-58" aria-hidden="true" tabindex="-1"></a>      EVID <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="cn">NA_character_</span>,</span>
+<span id="cb11-59"><a href="#cb11-59" aria-hidden="true" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> PCSTRESU</span>
+<span id="cb11-60"><a href="#cb11-60" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb11-61"><a href="#cb11-61" aria-hidden="true" tabindex="-1"></a>    <span class="at">RLTU =</span> <span class="st">"h"</span>,</span>
+<span id="cb11-62"><a href="#cb11-62" aria-hidden="true" tabindex="-1"></a>    <span class="at">USTRESC =</span> PCSTRESC,</span>
+<span id="cb11-63"><a href="#cb11-63" aria-hidden="true" tabindex="-1"></a>    <span class="at">UDTC =</span> <span class="fu">format_ISO8601</span>(ADTM),</span>
+<span id="cb11-64"><a href="#cb11-64" aria-hidden="true" tabindex="-1"></a>    <span class="at">II =</span> <span class="fu">if_else</span>(EVID <span class="sc">==</span> <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
+<span id="cb11-65"><a href="#cb11-65" aria-hidden="true" tabindex="-1"></a>    <span class="at">SS =</span> <span class="fu">if_else</span>(EVID <span class="sc">==</span> <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
+<span id="cb11-66"><a href="#cb11-66" aria-hidden="true" tabindex="-1"></a>    <span class="at">ADDL =</span> <span class="dv">0</span>,</span>
+<span id="cb11-67"><a href="#cb11-67" aria-hidden="true" tabindex="-1"></a>    <span class="at">OCC =</span> <span class="dv">1</span>,</span>
+<span id="cb11-68"><a href="#cb11-68" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="add-aseq" class="level3">
@@ -643,16 +637,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">derive_vars_merged</span>(<span class="at">dataset_add =</span> <span class="fu">select</span>(param_lookup, <span class="sc">-</span>PCTESTCD), <span class="at">by_vars =</span> <span class="fu">exprs</span>(PARAMCD)) <span class="sc">%&gt;%</span></span>
 <span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
 <span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">PROJID =</span> DRUG,</span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">PROJIDN =</span> <span class="dv">1</span></span>
-<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Remove temporary variables</span></span>
-<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(</span>
-<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span>DOMAIN, <span class="sc">-</span><span class="fu">starts_with</span>(<span class="st">"min"</span>), <span class="sc">-</span><span class="fu">starts_with</span>(<span class="st">"max"</span>), <span class="sc">-</span><span class="fu">starts_with</span>(<span class="st">"EX"</span>),</span>
-<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span><span class="fu">starts_with</span>(<span class="st">"PC"</span>), <span class="sc">-</span><span class="fu">ends_with</span>(<span class="st">"first"</span>), <span class="sc">-</span><span class="fu">ends_with</span>(<span class="st">"prev"</span>),</span>
-<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span><span class="fu">ends_with</span>(<span class="st">"DTM"</span>), <span class="sc">-</span><span class="fu">ends_with</span>(<span class="st">"DT"</span>), <span class="sc">-</span><span class="fu">ends_with</span>(<span class="st">"TM"</span>), <span class="sc">-</span><span class="fu">starts_with</span>(<span class="st">"VISIT"</span>),</span>
-<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span><span class="fu">starts_with</span>(<span class="st">"AVISIT"</span>), <span class="sc">-</span><span class="fu">starts_with</span>(<span class="st">"PARAM"</span>),</span>
-<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span><span class="fu">ends_with</span>(<span class="st">"TMF"</span>), <span class="sc">-</span><span class="fu">starts_with</span>(<span class="st">"TRT"</span>), <span class="sc">-</span><span class="fu">starts_with</span>(<span class="st">"ATPT"</span>), <span class="sc">-</span>DRUG</span>
-<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">PROJIDN =</span> <span class="dv">1</span>,</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">PART =</span> <span class="dv">1</span>,</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>  ) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
@@ -680,16 +667,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">SUBJIDN =</span> <span class="fu">as.numeric</span>(SUBJID),</span>
 <span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">ROUTE =</span> <span class="fu">unique</span>(ex<span class="sc">$</span>EXROUTE),</span>
 <span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">FORM =</span> <span class="fu">unique</span>(ex<span class="sc">$</span>EXDOSFRM),</span>
-<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">REGION1N =</span> COUNTRYN</span>
-<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">create_var_from_codelist</span>(metacore, <span class="at">input_var =</span> FORM, <span class="at">out_var =</span> FORMN) <span class="sc">%&gt;%</span> </span>
-<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">create_var_from_codelist</span>(metacore, <span class="at">input_var =</span> ROUTE, <span class="at">out_var =</span> ROUTEN) <span class="sc">%&gt;%</span> </span>
-<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(</span>
-<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>    STUDYID, STUDYIDN, SITEID, SITEIDN, USUBJID, USUBJIDN,</span>
-<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>    SUBJID, SUBJIDN, AGE, SEX, SEXN, COHORT, COHORTC, ROUTE, ROUTEN,</span>
-<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>    RACE, RACEN, AETHNIC, AETHNICN, FORM, FORMN, COUNTRY, COUNTRYN,</span>
-<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a>    REGION1, REGION1N</span>
-<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">REGION1 =</span> COUNTRY,</span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">REGION1N =</span> COUNTRYN,</span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">SUBJTYPC =</span> <span class="st">"Volunteer"</span>,</span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">create_var_from_codelist</span>(metacore, <span class="at">input_var =</span> FORM, <span class="at">out_var =</span> FORMN) <span class="sc">%&gt;%</span> </span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">create_var_from_codelist</span>(metacore, <span class="at">input_var =</span> ROUTE, <span class="at">out_var =</span> ROUTEN) <span class="sc">%&gt;%</span> </span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">create_var_from_codelist</span>(metacore, <span class="at">input_var =</span> SUBJTYPC, <span class="at">out_var =</span> SUBJTYP) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="derive-additional-baselines" class="level3">
 <h3 class="anchored" data-anchor-id="derive-additional-baselines">Derive Additional Baselines</h3>
@@ -748,11 +732,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>adppk_prefinal <span class="ot">&lt;-</span> adppk_aseq <span class="sc">%&gt;%</span></span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">derive_vars_merged</span>(</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">dataset_add =</span> covar_vslb,</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">dataset_add =</span> <span class="fu">select</span>(covar_vslb, <span class="sc">!!!</span><span class="fu">negate_vars</span>(adsl_vars)),</span>
 <span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">by_vars =</span> <span class="fu">exprs</span>(STUDYID, USUBJID)</span>
 <span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
 <span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(STUDYIDN, USUBJIDN, AFRLT, EVID) <span class="sc">%&gt;%</span></span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">RECSEQ =</span> <span class="fu">row_number</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Add RECSEQ</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Exclude records if needed</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">RECSEQ =</span> <span class="fu">row_number</span>(),</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>         <span class="at">EXCLFCOM =</span> <span class="st">"None"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">create_var_from_codelist</span>(metacore, <span class="at">input_var =</span> DVID, <span class="at">out_var =</span> DVIDN) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">create_var_from_codelist</span>(metacore, <span class="at">input_var =</span> EXCLFCOM, <span class="at">out_var =</span> EXCLF)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
@@ -771,41 +760,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>adppk <span class="ot">&lt;-</span> adppk_prefinal <span class="sc">%&gt;%</span></span>
 <span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_unspec_vars</span>(metacore) <span class="sc">%&gt;%</span> <span class="co"># Drop unspecified variables from specs</span></span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>  <span class="co">#check_variables(metacore) %&gt;% # Check all variables specified are present and no more</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">check_variables</span>(metacore) <span class="sc">%&gt;%</span> <span class="co"># Check all variables specified are present and no more</span></span>
 <span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">check_ct_data</span>(metacore) <span class="sc">%&gt;%</span> <span class="co"># Checks all variables with CT only contain values within the CT</span></span>
 <span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">order_cols</span>(metacore) <span class="sc">%&gt;%</span> <span class="co"># Orders the columns according to the spec</span></span>
 <span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sort_by_key</span>(metacore) <span class="co"># Sorts the rows by the sort keys</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following variable(s) were dropped:
-  DOSEP
-  DVL
-  ASEQ</code></pre>
-</div>
 </div>
 </section>
 <section id="apply-labels-and-formats-with-xportr" class="level2">
 <h2 class="anchored" data-anchor-id="apply-labels-and-formats-with-xportr">Apply Labels and Formats with xportr</h2>
-<p>Using <code>{xportr}</code> we add variable labels and save a transport file.</p>
+<p>Using {xportr} we check variable type, assign variable lenght, add variable labels, add variable formats, and save a transport file.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>adppk_xpt <span class="ot">&lt;-</span> adppk <span class="sc">%&gt;%</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xportr_type</span>(metacore) <span class="sc">%&gt;%</span> <span class="co"># Coerce variable type to match spec</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xportr_length</span>(metacore) <span class="sc">%&gt;%</span> <span class="co"># Assigns SAS length from a variable level metadata</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xportr_label</span>(metacore) <span class="sc">%&gt;%</span> <span class="co"># Assigns variable label from metacore specifications</span></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xportr_format</span>(metacore) <span class="sc">%&gt;%</span> <span class="co"># Assigns variable format from metacore specifications</span></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xportr_df_label</span>(metacore) <span class="sc">%&gt;%</span> <span class="co"># Assigns dataset label from metacore specifications</span></span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xportr_write</span>(<span class="fu">file.path</span>(dir, <span class="st">"adppk.xpt"</span>)) <span class="co"># Write xpt v5 transport file</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>adppk_xpt <span class="ot">&lt;-</span> adppk <span class="sc">%&gt;%</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xportr_type</span>(metacore) <span class="sc">%&gt;%</span> <span class="co"># Coerce variable type to match spec</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xportr_length</span>(metacore) <span class="sc">%&gt;%</span> <span class="co"># Assigns SAS length from a variable level metadata</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xportr_label</span>(metacore) <span class="sc">%&gt;%</span> <span class="co"># Assigns variable label from metacore specifications</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xportr_format</span>(metacore) <span class="sc">%&gt;%</span> <span class="co"># Assigns variable format from metacore specifications</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xportr_df_label</span>(metacore) <span class="sc">%&gt;%</span> <span class="co"># Assigns dataset label from metacore specifications</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xportr_write</span>(<span class="fu">file.path</span>(dir, <span class="st">"adppk.xpt"</span>)) <span class="co"># Write xpt v5 transport file</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="save-final-output" class="level2">
 <h2 class="anchored" data-anchor-id="save-final-output">Save Final Output</h2>
 <p>Finally we save the final output. We will also create a <code>CSV</code> file for the modeler.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- Save output ----</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(adppk, <span class="at">file =</span> <span class="fu">file.path</span>(dir, <span class="st">"adppk.rds"</span>), <span class="at">compress =</span> <span class="st">"bzip2"</span>)</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Write CSV</span></span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(adppk_xpt, <span class="st">"./output/adppk.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- Save output ----</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(adppk, <span class="at">file =</span> <span class="fu">file.path</span>(dir, <span class="st">"adppk.rds"</span>), <span class="at">compress =</span> <span class="st">"bzip2"</span>)</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Write CSV</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(adppk_xpt, <span class="st">"./output/adppk.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="example" class="level1">
