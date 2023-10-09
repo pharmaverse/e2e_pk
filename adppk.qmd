@@ -1,5 +1,5 @@
 ---
-title: "ADPPK Template"
+title: "ADPPK Template Walkthrough"
 ---
 
 The Population PK Analysis Data (ADPPK) follows the forthcoming CDISC
