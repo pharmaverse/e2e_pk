@@ -327,22 +327,22 @@ adppk_aseq <- adppk_aval %>%
     PROJID = DRUG,
     PROJIDN = 1,
     PART = 1,
-  ) 
+  )
 
 #---- Derive Covariates ----
 # Include numeric values for STUDYIDN, USUBJIDN, SEXN, RACEN etc.
 # Use {metatools} to decode variables
 
 covar <- adsl %>%
-  create_var_from_codelist(metacore, input_var = STUDYID, out_var = STUDYIDN) %>% 
-  create_var_from_codelist(metacore, input_var = SEX, out_var = SEXN) %>% 
-  create_var_from_codelist(metacore, input_var = RACE, out_var = RACEN) %>% 
-  create_var_from_codelist(metacore, input_var = ETHNIC, out_var = AETHNIC) %>% 
-  create_var_from_codelist(metacore, input_var = AETHNIC, out_var = AETHNICN) %>% 
-  create_var_from_codelist(metacore, input_var = ARMCD, out_var = COHORT) %>% 
-  create_var_from_codelist(metacore, input_var = ARMCD, out_var = COHORTC) %>% 
-  create_var_from_codelist(metacore, input_var = COUNTRY, out_var = COUNTRYN) %>% 
-  create_var_from_codelist(metacore, input_var = COUNTRY, out_var = COUNTRYL) %>% 
+  create_var_from_codelist(metacore, input_var = STUDYID, out_var = STUDYIDN) %>%
+  create_var_from_codelist(metacore, input_var = SEX, out_var = SEXN) %>%
+  create_var_from_codelist(metacore, input_var = RACE, out_var = RACEN) %>%
+  create_var_from_codelist(metacore, input_var = ETHNIC, out_var = AETHNIC) %>%
+  create_var_from_codelist(metacore, input_var = AETHNIC, out_var = AETHNICN) %>%
+  create_var_from_codelist(metacore, input_var = ARMCD, out_var = COHORT) %>%
+  create_var_from_codelist(metacore, input_var = ARMCD, out_var = COHORTC) %>%
+  create_var_from_codelist(metacore, input_var = COUNTRY, out_var = COUNTRYN) %>%
+  create_var_from_codelist(metacore, input_var = COUNTRY, out_var = COUNTRYL) %>%
   mutate(
     STUDYIDN = as.numeric(word(USUBJID, 1, sep = fixed("-"))),
     SITEIDN = as.numeric(word(USUBJID, 2, sep = fixed("-"))),
@@ -354,9 +354,9 @@ covar <- adsl %>%
     REGION1N = COUNTRYN,
     SUBJTYPC = "Volunteer",
   ) %>%
-  create_var_from_codelist(metacore, input_var = FORM, out_var = FORMN) %>% 
-  create_var_from_codelist(metacore, input_var = ROUTE, out_var = ROUTEN) %>% 
-  create_var_from_codelist(metacore, input_var = SUBJTYPC, out_var = SUBJTYP) 
+  create_var_from_codelist(metacore, input_var = FORM, out_var = FORMN) %>%
+  create_var_from_codelist(metacore, input_var = ROUTE, out_var = ROUTEN) %>%
+  create_var_from_codelist(metacore, input_var = SUBJTYPC, out_var = SUBJTYP)
 
 #---- Derive additional baselines from VS and LB ----
 
@@ -412,11 +412,13 @@ adppk_prefinal <- adppk_aseq %>%
   arrange(STUDYIDN, USUBJIDN, AFRLT, EVID) %>%
   # Add RECSEQ
   # Exclude records if needed
-  mutate(RECSEQ = row_number(),
-         EXCLFCOM = "None") %>% 
-  create_var_from_codelist(metacore, input_var = DVID, out_var = DVIDN) %>% 
+  mutate(
+    RECSEQ = row_number(),
+    EXCLFCOM = "None"
+  ) %>%
+  create_var_from_codelist(metacore, input_var = DVID, out_var = DVIDN) %>%
   create_var_from_codelist(metacore, input_var = EXCLFCOM, out_var = EXCLF)
-  
+
 # Final Steps, Select final variables and Add labels
 # This process will be based on your metadata, no example given for this reason
 # ...
@@ -448,5 +450,3 @@ saveRDS(adppk, file = file.path(dir, "adppk.rds"), compress = "bzip2")
 
 # Write CSV
 write_csv(adppk_xpt, "./output/adppk.csv")
-
-

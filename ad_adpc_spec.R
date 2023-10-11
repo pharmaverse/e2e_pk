@@ -13,7 +13,7 @@ library(stringr)
 library(metacore)
 library(metatools)
 library(xportr)
-library(pharmaversesdtm) 
+library(pharmaversesdtm)
 
 # ---- Load Specs for Metacore ----
 
@@ -336,7 +336,7 @@ adpc_aval <- adpc_nrrlt %>%
     ),
     # Derive BASETYPE
     BASETYPE = paste(ATPTREF, "Baseline"),
-    
+
     # Derive Actual Dose
     DOSEA = case_when(
       EVID == 1 ~ EXDOSE,
@@ -433,9 +433,9 @@ adpc_aseq <- adpc_chg %>%
     check_type = "error"
   ) %>%
   # Derive PARAM and PARAMN using metatools
-  create_var_from_codelist(metacore, input_var = PARAMCD, out_var = PARAM) %>% 
-  create_var_from_codelist(metacore, input_var = PARAMCD, out_var = PARAMN) 
-  
+  create_var_from_codelist(metacore, input_var = PARAMCD, out_var = PARAM) %>%
+  create_var_from_codelist(metacore, input_var = PARAMCD, out_var = PARAMN)
+
 #---- Derive additional baselines from VS ----
 
 adpc_baselines <- adpc_aseq %>%
@@ -492,5 +492,3 @@ adpc_xpt <- adpc %>%
 # ---- Save output ----
 
 saveRDS(adpc, file = file.path(dir, "adpc.rds"), compress = "bzip2")
-
-
