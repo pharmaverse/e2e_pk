@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>End to End Examples for PK - ADPPK Template</title>
+<title>End to End Examples for PK - ADPPK Template Walkthrough</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -159,7 +159,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     </nav>
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">ADPPK Template</h1>
+      <h1 class="quarto-secondary-nav-title">ADPPK Template Walkthrough</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -179,12 +179,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./adpc.html" class="sidebar-item-text sidebar-link">ADPC Template</a>
+  <a href="./adpc.html" class="sidebar-item-text sidebar-link">ADPC Template Walkthrough</a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./adppk.html" class="sidebar-item-text sidebar-link active">ADPPK Template</a>
+  <a href="./adppk.html" class="sidebar-item-text sidebar-link active">ADPPK Template Walkthrough</a>
   </div>
 </li>
     </ul>
@@ -229,7 +229,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">ADPPK Template</h1>
+<h1 class="title d-none d-lg-block">ADPPK Template Walkthrough</h1>
 </div>
 
 
@@ -259,7 +259,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(metatools)</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(xportr)</span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pharmaversesdtm) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pharmaversesdtm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="next-load-specifications-for-metacore" class="level2">
@@ -629,7 +629,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">PROJID =</span> DRUG,</span>
 <span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">PROJIDN =</span> <span class="dv">1</span>,</span>
 <span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">PART =</span> <span class="dv">1</span>,</span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>  ) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
@@ -641,15 +641,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Include numeric values for STUDYIDN, USUBJIDN, SEXN, RACEN etc.</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>covar <span class="ot">&lt;-</span> adsl <span class="sc">%&gt;%</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">create_var_from_codelist</span>(metacore, <span class="at">input_var =</span> STUDYID, <span class="at">out_var =</span> STUDYIDN) <span class="sc">%&gt;%</span> </span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">create_var_from_codelist</span>(metacore, <span class="at">input_var =</span> SEX, <span class="at">out_var =</span> SEXN) <span class="sc">%&gt;%</span> </span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">create_var_from_codelist</span>(metacore, <span class="at">input_var =</span> RACE, <span class="at">out_var =</span> RACEN) <span class="sc">%&gt;%</span> </span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">create_var_from_codelist</span>(metacore, <span class="at">input_var =</span> ETHNIC, <span class="at">out_var =</span> AETHNIC) <span class="sc">%&gt;%</span> </span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">create_var_from_codelist</span>(metacore, <span class="at">input_var =</span> AETHNIC, <span class="at">out_var =</span> AETHNICN) <span class="sc">%&gt;%</span> </span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">create_var_from_codelist</span>(metacore, <span class="at">input_var =</span> ARMCD, <span class="at">out_var =</span> COHORT) <span class="sc">%&gt;%</span> </span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">create_var_from_codelist</span>(metacore, <span class="at">input_var =</span> ARMCD, <span class="at">out_var =</span> COHORTC) <span class="sc">%&gt;%</span> </span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">create_var_from_codelist</span>(metacore, <span class="at">input_var =</span> COUNTRY, <span class="at">out_var =</span> COUNTRYN) <span class="sc">%&gt;%</span> </span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">create_var_from_codelist</span>(metacore, <span class="at">input_var =</span> COUNTRY, <span class="at">out_var =</span> COUNTRYL) <span class="sc">%&gt;%</span> </span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">create_var_from_codelist</span>(metacore, <span class="at">input_var =</span> STUDYID, <span class="at">out_var =</span> STUDYIDN) <span class="sc">%&gt;%</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">create_var_from_codelist</span>(metacore, <span class="at">input_var =</span> SEX, <span class="at">out_var =</span> SEXN) <span class="sc">%&gt;%</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">create_var_from_codelist</span>(metacore, <span class="at">input_var =</span> RACE, <span class="at">out_var =</span> RACEN) <span class="sc">%&gt;%</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">create_var_from_codelist</span>(metacore, <span class="at">input_var =</span> ETHNIC, <span class="at">out_var =</span> AETHNIC) <span class="sc">%&gt;%</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">create_var_from_codelist</span>(metacore, <span class="at">input_var =</span> AETHNIC, <span class="at">out_var =</span> AETHNICN) <span class="sc">%&gt;%</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">create_var_from_codelist</span>(metacore, <span class="at">input_var =</span> ARMCD, <span class="at">out_var =</span> COHORT) <span class="sc">%&gt;%</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">create_var_from_codelist</span>(metacore, <span class="at">input_var =</span> ARMCD, <span class="at">out_var =</span> COHORTC) <span class="sc">%&gt;%</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">create_var_from_codelist</span>(metacore, <span class="at">input_var =</span> COUNTRY, <span class="at">out_var =</span> COUNTRYN) <span class="sc">%&gt;%</span></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">create_var_from_codelist</span>(metacore, <span class="at">input_var =</span> COUNTRY, <span class="at">out_var =</span> COUNTRYL) <span class="sc">%&gt;%</span></span>
 <span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
 <span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">STUDYIDN =</span> <span class="fu">as.numeric</span>(<span class="fu">word</span>(USUBJID, <span class="dv">1</span>, <span class="at">sep =</span> <span class="fu">fixed</span>(<span class="st">"-"</span>))),</span>
 <span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">SITEIDN =</span> <span class="fu">as.numeric</span>(<span class="fu">word</span>(USUBJID, <span class="dv">2</span>, <span class="at">sep =</span> <span class="fu">fixed</span>(<span class="st">"-"</span>))),</span>
@@ -661,9 +661,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">REGION1N =</span> COUNTRYN,</span>
 <span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">SUBJTYPC =</span> <span class="st">"Volunteer"</span>,</span>
 <span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">create_var_from_codelist</span>(metacore, <span class="at">input_var =</span> FORM, <span class="at">out_var =</span> FORMN) <span class="sc">%&gt;%</span> </span>
-<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">create_var_from_codelist</span>(metacore, <span class="at">input_var =</span> ROUTE, <span class="at">out_var =</span> ROUTEN) <span class="sc">%&gt;%</span> </span>
-<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">create_var_from_codelist</span>(metacore, <span class="at">input_var =</span> SUBJTYPC, <span class="at">out_var =</span> SUBJTYP) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">create_var_from_codelist</span>(metacore, <span class="at">input_var =</span> FORM, <span class="at">out_var =</span> FORMN) <span class="sc">%&gt;%</span></span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">create_var_from_codelist</span>(metacore, <span class="at">input_var =</span> ROUTE, <span class="at">out_var =</span> ROUTEN) <span class="sc">%&gt;%</span></span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">create_var_from_codelist</span>(metacore, <span class="at">input_var =</span> SUBJTYPC, <span class="at">out_var =</span> SUBJTYP)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="derive-additional-baselines" class="level3">
 <h3 class="anchored" data-anchor-id="derive-additional-baselines">Derive Additional Baselines</h3>
@@ -728,10 +728,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(STUDYIDN, USUBJIDN, AFRLT, EVID) <span class="sc">%&gt;%</span></span>
 <span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Add RECSEQ</span></span>
 <span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Exclude records if needed</span></span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">RECSEQ =</span> <span class="fu">row_number</span>(),</span>
-<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>         <span class="at">EXCLFCOM =</span> <span class="st">"None"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">create_var_from_codelist</span>(metacore, <span class="at">input_var =</span> DVID, <span class="at">out_var =</span> DVIDN) <span class="sc">%&gt;%</span> </span>
-<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">create_var_from_codelist</span>(metacore, <span class="at">input_var =</span> EXCLFCOM, <span class="at">out_var =</span> EXCLF)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">RECSEQ =</span> <span class="fu">row_number</span>(),</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">EXCLFCOM =</span> <span class="st">"None"</span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">create_var_from_codelist</span>(metacore, <span class="at">input_var =</span> DVID, <span class="at">out_var =</span> DVIDN) <span class="sc">%&gt;%</span></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">create_var_from_codelist</span>(metacore, <span class="at">input_var =</span> EXCLFCOM, <span class="at">out_var =</span> EXCLF)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
