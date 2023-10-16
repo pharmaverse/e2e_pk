@@ -1,5 +1,5 @@
 ---
-title: "ADPC Template"
+title: "ADPC Template Walkthrough"
 ---
 
 The Non-compartmental analysis (NCA) ADaM uses the CDISC Implementation Guide (<https://www.cdisc.org/standards/foundational/adam/adamig-non-compartmental-analysis-input-data-v1-0>). This example presented uses underlying `EX` and `PC` domains where the `EX` and `PC` domains represent data as collected and the `ADPC` ADaM is output. However, the example can be applied to situations where an `EC` domain is used as input instead of `EX` and/or `ADNCA` or another ADaM is created.
@@ -32,7 +32,7 @@ library(stringr)
 library(metacore)
 library(metatools)
 library(xportr)
-library(pharmaversesdtm) 
+library(pharmaversesdtm)
 ```
 
 ## Next Load Specifications for Metacore
@@ -115,7 +115,6 @@ pc_dates <- pc %>%
     DRUG = PCTEST,
     NFRLT = if_else(PCTPTNUM < 0, 0, PCTPTNUM), .after = USUBJID
   )
-
 ```
 
 ### Get Dosing Information
@@ -236,7 +235,6 @@ adpc_first_dose <- pc_dates %>%
     AVISITN = NFRLT %/% 24 + 1,
     AVISIT = paste("Day", AVISITN),
   )
-
 ```
 
 ### Find Previous Dose
@@ -262,7 +260,6 @@ adpc_prev <- adpc_first_dose %>%
     mode = "last",
     check_type = "none"
   )
-
 ```
 
 ### Find Next Dose
@@ -330,8 +327,6 @@ adpc_nom_next <- adpc_nom_prev %>%
     mode = "first",
     check_type = "none"
   )
-
-
 ```
 
 ### Combine PC and EX Data
@@ -426,7 +421,6 @@ adpc_nrrlt <- adpc_arrlt %>%
       TRUE ~ NFRLT - NFRLT_next
     )
   )
-
 ```
 
 ### Derive Analysis Variables
@@ -470,7 +464,7 @@ adpc_aval <- adpc_nrrlt %>%
     ),
     # Derive BASETYPE
     BASETYPE = paste(ATPTREF, "Baseline"),
-    
+
     # Derive Actual Dose
     DOSEA = case_when(
       EVID == 1 ~ EXDOSE,
@@ -510,7 +504,6 @@ adpc_aval <- adpc_nrrlt %>%
     SRCVAR = "SEQ",
     SRCSEQ = coalesce(PCSEQ, EXSEQ)
   )
-
 ```
 
 ### Derive DTYPE Copy Records
@@ -545,8 +538,6 @@ dtype <- adpc_aval %>%
   ) %>%
   derive_vars_dtm_to_dt(exprs(PCRFTDTM)) %>%
   derive_vars_dtm_to_tm(exprs(PCRFTDTM))
-
-
 ```
 
 ### Combine Original and DTYPE Copy
@@ -567,7 +558,6 @@ adpc_dtype <- bind_rows(adpc_aval, dtype) %>%
     ANL01FL = "Y",
     ANL02FL = if_else(is.na(DTYPE), "Y", NA_character_),
   )
-
 ```
 
 ### Derive BASE and CHG
@@ -588,9 +578,6 @@ adpc_base <- adpc_dtype %>%
   )
 
 adpc_chg <- derive_var_chg(adpc_base)
-
-
-
 ```
 
 ### Add ASEQ
@@ -613,9 +600,8 @@ adpc_aseq <- adpc_chg %>%
     check_type = "error"
   ) %>%
   # Derive PARAM and PARAMN using metatools
-  create_var_from_codelist(metacore, input_var = PARAMCD, out_var = PARAM) %>% 
-  create_var_from_codelist(metacore, input_var = PARAMCD, out_var = PARAMN) 
-
+  create_var_from_codelist(metacore, input_var = PARAMCD, out_var = PARAM) %>%
+  create_var_from_codelist(metacore, input_var = PARAMCD, out_var = PARAMN)
 ```
 
 ### Derive Additional Baselines
@@ -659,8 +645,6 @@ adpc_prefinal <- adpc_baselines %>%
     dataset_add = select(adsl, !!!negate_vars(adsl_vars)),
     by_vars = exprs(STUDYID, USUBJID)
   )
-
-
 ```
 
 ## Check Data With Metacore
@@ -709,7 +693,6 @@ Finally we save the final output.
 # ---- Save output ----
 
 saveRDS(adpc, file = file.path(dir, "adpc.rds"), compress = "bzip2")
-
 ```
 
 # Example Scripts {#example}
